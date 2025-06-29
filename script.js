@@ -1,12 +1,20 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
+    // Variabel elemen dari HTML
     const latestGrid = document.getElementById('latest-movies-grid');
     const popularSeriesGrid = document.getElementById('popular-series-grid');
     const movieGrid = document.getElementById('movie-grid');
+    
+    // Dropdown elements
     const genreDropdownMenu = document.getElementById('genre-dropdown-menu');
     const countryDropdownMenu = document.getElementById('country-dropdown-menu');
+    const typeDropdownMenu = document.getElementById('type-dropdown-menu');
+    
+    // Button elements
     const genreButton = document.querySelector('#genre-filter-container .btn');
     const countryButton = document.querySelector('#country-filter-container .btn');
+    const typeButton = document.querySelector('#type-filter-container .btn');
+    
     const homeButton = document.getElementById('home-button');
     const searchInput = document.getElementById('search-input');
     const defaultView = document.getElementById('default-view');
@@ -64,24 +72,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const activeGenre = genreDropdownMenu.querySelector('.dropdown-item.active').dataset.filter;
         const activeCountry = countryDropdownMenu.querySelector('.dropdown-item.active').dataset.filter;
+        const activeType = typeDropdownMenu.querySelector('.dropdown-item.active').dataset.filter;
         const searchTerm = searchInput.value.toLowerCase();
 
-        if (activeGenre === 'all' && activeCountry === 'all' && searchTerm.trim() === '') {
+        if (activeGenre === 'all' && activeCountry === 'all' && activeType === 'all' && searchTerm.trim() === '') {
             showHomePageView();
             return;
         }
 
         let filtered = allContent.filter(item => {
             const genreMatch = activeGenre === 'all' || (item.genre && item.genre.includes(activeGenre));
-            const countryMatch = activeCountry === 'all' || (item.country && item.country === activeCountry);
+            const countryMatch = activeCountry === 'all' || (item.country && item.country.includes(activeCountry));
+            const typeMatch = activeType === 'all' || (item.type && item.type === activeType);
             
-            // --- LOGIKA PENCARIAN DIPERBARUI DI SINI ---
             const searchMatch = searchTerm.trim() === '' || 
                                 (item.title && item.title.toLowerCase().includes(searchTerm)) ||
                                 (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm)));
-            // --- AKHIR PEMBARUAN LOGIKA PENCARIAN ---
 
-            return genreMatch && countryMatch && searchMatch;
+            return genreMatch && countryMatch && typeMatch && searchMatch;
         });
         displayContent(filtered, movieGrid);
     }
@@ -93,14 +101,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (genreButton) genreButton.textContent = "Genre";
         if (countryButton) countryButton.textContent = "Country";
-        if (genreDropdownMenu) {
-            genreDropdownMenu.querySelectorAll('.dropdown-item.active').forEach(i => i.classList.remove('active'));
-            genreDropdownMenu.querySelector('[data-filter="all"]')?.classList.add('active');
-        }
-        if (countryDropdownMenu) {
-            countryDropdownMenu.querySelectorAll('.dropdown-item.active').forEach(i => i.classList.remove('active'));
-            countryDropdownMenu.querySelector('[data-filter="all"]')?.classList.add('active');
-        }
+        if (typeButton) typeButton.textContent = "Type";
+        
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.querySelectorAll('.dropdown-item.active').forEach(i => i.classList.remove('active'));
+            menu.querySelector('[data-filter="all"]')?.classList.add('active');
+        });
     }
 
     async function initialize() {
@@ -115,9 +121,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             displayContent(popularSeries, popularSeriesGrid);
 
             const allGenres = allContent.flatMap(item => item.genre || []).filter(g => g);
-            const allCountries = allContent.map(item => item.country).filter(c => c);
+            const allCountries = allContent.flatMap(item => item.country || []).filter(c => c);
+            const allTypes = allContent.map(item => item.type).filter(t => t);
+
             createFilterDropdowns(allGenres, genreDropdownMenu, genreButton, 'Genres');
             createFilterDropdowns(allCountries, countryDropdownMenu, countryButton, 'Countries');
+            createFilterDropdowns(allTypes, typeDropdownMenu, typeButton, 'Types');
             
             searchInput.addEventListener('input', filterAndDisplayContent);
             homeButton.addEventListener('click', showHomePageView);
