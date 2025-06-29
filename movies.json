@@ -11,7 +11,7 @@
         "quality": "HD",
         "director": "Denis Villeneuve",
         "cast": "Timothée Chalamet, Zendaya, Rebecca Ferguson",
-        "description": "Paul Atreides unites with Chani and the Fremen...",
+        "description": "Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.",
         "trailerUrl": "https://www.youtube.com/embed/waybbAcdryg",
         "availableSubtitles": ["Indonesian", "English", "Spanish"]
     },
@@ -26,14 +26,16 @@
         "genre": ["Sci-Fi", "Action", "Drama"],
         "quality": "4K",
         "cast": "Ella Purnell, Aaron Moten, Walton Goggins",
-        "description": "In a future, post-apocalyptic Los Angeles...",
+        "description": "In a future, post-apocalyptic Los Angeles brought about by nuclear decimation, citizens must live in underground bunkers to protect themselves from radiation, mutants and bandits.",
         "seasons": [
             {
                 "season": 1,
                 "episodes": [
-                    { "episode": 1, "title": "The End", "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
-                    { "episode": 2, "title": "The Target", "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
-                    { "episode": 3, "title": "The Head", "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" }
+                    { "episode": 1, "title": "The End", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
+                    { "episode": 2, "title": "The Target", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
+                    { "episode": 3, "title": "The Head", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
+                    { "episode": 4, "title": "The Ghouls", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
+                    { "episode": 5, "title": "The Past", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" }
                 ]
             }
         ]
@@ -50,7 +52,7 @@
         "quality": "HD",
         "director": "Pat Boonnitipat",
         "cast": "Putthipong Assaratanakul, Usha Seamkhum",
-        "description": "A young man quits his job to look after his dying grandmother...",
+        "description": "A young man quits his job to look after his dying grandmother, with a secret agenda to inherit her fortune.",
         "trailerUrl": "https://www.youtube.com/embed/Npo_aG4a3aI",
         "availableSubtitles": ["Indonesian", "English"]
     },
@@ -62,16 +64,24 @@
         "rating": "9.2",
         "poster": "https://image.tmdb.org/t/p/w500/yYl2i2n0QkS2n2Tke8e1s2L1g0t.jpg",
         "country": "USA",
-        "genre": ["Drama", "History"],
+        "genre": ["Drama", "History", "War"],
         "quality": "HD",
         "cast": "Hiroyuki Sanada, Cosmo Jarvis, Anna Sawai",
-        "description": "Set in the year 1600, at the dawn of a century-defining civil war...",
+        "description": "Set in the year 1600, at the dawn of a century-defining civil war, Lord Yoshii Toranaga is fighting for his life as his enemies on the Council of Regents unite against him.",
         "seasons": [
             {
                 "season": 1,
                 "episodes": [
-                    { "episode": 1, "title": "Anjin", "trailerUrl": "https://www.youtube.com/embed/H4_82h5D62U" },
-                    { "episode": 2, "title": "Servants of Two Masters", "trailerUrl": "https://www.youtube.com/embed/H4_82h5D62U" }
+                    { "episode": 1, "title": "Anjin", "videoUrl": "https://www.youtube.com/embed/H4_82h5D62U" },
+                    { "episode": 2, "title": "Servants of Two Masters", "videoUrl": "https://www.youtube.com/embed/H4_82h5D62U" },
+                    { "episode": 3, "title": "Tomorrow is Tomorrow", "videoUrl": "https://www.youtube.com/embed/H4_82h5D62U" }
+                ]
+            },
+            {
+                "season": 2,
+                "episodes": [
+                    { "episode": 1, "title": "The Return", "videoUrl": "https://www.youtube.com/embed/H4_82h5D62U" },
+                    { "episode": 2, "title": "The Alliance", "videoUrl": "https://www.youtube.com/embed/H4_82h5D62U" }
                 ]
             }
         ]
