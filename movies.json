@@ -5,7 +5,43 @@
         "year": "2024",
         "rating": "9.0",
         "poster": "https://image.tmdb.org/t/p/w500/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
-        "category": "latest"
+        "category": "latest",
+        "director": "Denis Villeneuve",
+        "cast": "Timothée Chalamet, Zendaya, Rebecca Ferguson",
+        "genre": "Sci-Fi, Adventure",
+        "quality": "HD",
+        "description": "Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.",
+        "trailerUrl": "https://www.youtube.com/embed/waybbAcdryg",
+        "availableSubtitles": ["Indonesian", "English", "Spanish"]
     },
-    // ... all other movies ...
+    {
+        "id": 2,
+        "title": "Godzilla x Kong",
+        "year": "2024",
+        "rating": "8.1",
+        "poster": "https://image.tmdb.org/t/p/w500/vHkL_H0u0I2sQp2L5Y71c3vchHe.jpg",
+        "category": "latest",
+        "director": "Adam Wingard",
+        "cast": "Rebecca Hall, Brian Tyree Henry, Dan Stevens",
+        "genre": "Action, Sci-Fi",
+        "quality": "HD",
+        "description": "Two ancient titans, Godzilla and Kong, clash in an epic battle as humans unravel their intertwined origins and connection to Skull Island's mysteries.",
+        "trailerUrl": "https://www.youtube.com/embed/qqrpMRDuP_I",
+        "availableSubtitles": ["Indonesian", "English"]
+    },
+    {
+        "id": 3,
+        "title": "Fallout",
+        "year": "2024",
+        "rating": "8.9",
+        "poster": "https://image.tmdb.org/t/p/w500/gqCCr2I1s22adD2iRoA120RmcJ5.jpg",
+        "category": "series",
+        "director": "Jonathan Nolan",
+        "cast": "Ella Purnell, Aaron Moten, Walton Goggins",
+        "genre": "Sci-Fi, Action, Drama",
+        "quality": "4K",
+        "description": "In a future, post-apocalyptic Los Angeles brought about by nuclear decimation, citizens must live in underground bunkers to protect themselves from radiation, mutants and bandits.",
+        "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A",
+        "availableSubtitles": ["Indonesian", "English", "German", "French"]
+    }
 ]
