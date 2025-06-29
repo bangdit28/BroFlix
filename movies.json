@@ -95,12 +95,12 @@
         "rating": "8.5",
         "poster": "https://image.tmdb.org/t/p/original/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg",
         "country": ["United States", "Canada"],
-        "genre": ["Drama", "History", "War"],
+        "genre": ["Action", "Adventure", "Drama"],
         "quality": "HD",
-        "cast": "Hiroyuki Sanada, Cosmo Jarvis, Anna Sawai",
-        "description": "Set in the year 1600, at the dawn of a century-defining civil war, Lord Yoshii Toranaga is fighting for his life as his enemies on the Council of Regents unite against him.",
+        "cast": "Pedro Pascal, Bella Ramsey, Gabriel Luna",
+        "description": "Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.",
         "availableSubtitles": ["Indonesian", "English", "Japanese"],
-        "keywords": ["hiroyuki sanada", "samurai", "japan", "feudal", "anjin", "toranaga", "history"],
+        "keywords": ["people smuggling", "post-apocalyptic future", "infection", "survival", "epidemic", "based on video game"],
         "seasons": [
             {
                 "season": 1,
