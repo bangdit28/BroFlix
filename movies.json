@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+        "type": "movie",
         "title": "Dune: Part Two",
         "year": "2024",
         "rating": "9.0",
@@ -10,68 +11,69 @@
         "quality": "HD",
         "director": "Denis Villeneuve",
         "cast": "Timothée Chalamet, Zendaya, Rebecca Ferguson",
-        "description": "Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.",
+        "description": "Paul Atreides unites with Chani and the Fremen...",
         "trailerUrl": "https://www.youtube.com/embed/waybbAcdryg",
         "availableSubtitles": ["Indonesian", "English", "Spanish"]
     },
     {
         "id": 2,
-        "title": "Godzilla x Kong",
+        "type": "series",
+        "title": "Fallout",
         "year": "2024",
-        "rating": "8.1",
-        "poster": "https://image.tmdb.org/t/p/w500/vHkL_H0u0I2sQp2L5Y71c3vchHe.jpg",
+        "rating": "8.9",
+        "poster": "https://image.tmdb.org/t/p/w500/gqCCr2I1s22adD2iRoA120RmcJ5.jpg",
         "country": "USA",
-        "genre": ["Action", "Sci-Fi"],
+        "genre": ["Sci-Fi", "Action", "Drama"],
         "quality": "4K",
-        "director": "Adam Wingard",
-        "cast": "Rebecca Hall, Brian Tyree Henry, Dan Stevens",
-        "description": "Two ancient titans, Godzilla and Kong, clash in an epic battle as humans unravel their intertwined origins and connection to Skull Island's mysteries.",
-        "trailerUrl": "https://www.youtube.com/embed/qqrpMRDuP_I",
-        "availableSubtitles": ["Indonesian", "English"]
+        "cast": "Ella Purnell, Aaron Moten, Walton Goggins",
+        "description": "In a future, post-apocalyptic Los Angeles...",
+        "seasons": [
+            {
+                "season": 1,
+                "episodes": [
+                    { "episode": 1, "title": "The End", "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
+                    { "episode": 2, "title": "The Target", "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
+                    { "episode": 3, "title": "The Head", "trailerUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" }
+                ]
+            }
+        ]
     },
     {
         "id": 3,
-        "title": "Furiosa: A Mad Max Saga",
-        "year": "2024",
-        "rating": "8.5",
-        "poster": "https://image.tmdb.org/t/p/w500/iADOJ8Zymht2iPMrs3orPkUscfQ.jpg",
-        "country": "Australia",
-        "genre": ["Action", "Sci-Fi", "Adventure"],
-        "quality": "CAM",
-        "director": "George Miller",
-        "cast": "Anya Taylor-Joy, Chris Hemsworth, Tom Burke",
-        "description": "The origin story of renegade warrior Furiosa before she teamed up with Mad Max in Fury Road.",
-        "trailerUrl": "https://www.youtube.com/embed/XJMuhwVlca4",
-        "availableSubtitles": ["Indonesian", "English"]
-    },
-    {
-        "id": 4,
-        "title": "Exhuma",
-        "year": "2024",
-        "rating": "8.8",
-        "poster": "https://image.tmdb.org/t/p/w500/pSnD5Vn2pX1dse7s23wbyc2O9tq.jpg",
-        "country": "South Korea",
-        "genre": ["Horror", "Thriller", "Mystery"],
-        "quality": "HD",
-        "director": "Jang Jae-hyun",
-        "cast": "Choi Min-sik, Kim Go-eun, Yoo Hae-jin",
-        "description": "The process of exhuming an ominous grave unleashes dreadful consequences buried underneath.",
-        "trailerUrl": "https://www.youtube.com/embed/sI_2p5i8b_w",
-        "availableSubtitles": ["Indonesian"]
-    },
-    {
-        "id": 5,
+        "type": "movie",
         "title": "How to Make Millions Before Grandma Dies",
         "year": "2024",
         "rating": "9.1",
         "poster": "https://image.tmdb.org/t/p/w500/8xV5hC2mlo1T0m4sWN4i32p4d3.jpg",
         "country": "Thailand",
         "genre": ["Drama", "Comedy"],
-        "quality": "SD",
+        "quality": "HD",
         "director": "Pat Boonnitipat",
         "cast": "Putthipong Assaratanakul, Usha Seamkhum",
-        "description": "A young man quits his job to look after his dying grandmother, with a secret agenda to inherit her fortune.",
+        "description": "A young man quits his job to look after his dying grandmother...",
         "trailerUrl": "https://www.youtube.com/embed/Npo_aG4a3aI",
         "availableSubtitles": ["Indonesian", "English"]
+    },
+    {
+        "id": 4,
+        "type": "series",
+        "title": "Shōgun",
+        "year": "2024",
+        "rating": "9.2",
+        "poster": "https://image.tmdb.org/t/p/w500/yYl2i2n0QkS2n2Tke8e1s2L1g0t.jpg",
+        "country": "USA",
+        "genre": ["Drama", "History"],
+        "quality": "HD",
+        "cast": "Hiroyuki Sanada, Cosmo Jarvis, Anna Sawai",
+        "description": "Set in the year 1600, at the dawn of a century-defining civil war...",
+        "seasons": [
+            {
+                "season": 1,
+                "episodes": [
+                    { "episode": 1, "title": "Anjin", "trailerUrl": "https://www.youtube.com/embed/H4_82h5D62U" },
+                    { "episode": 2, "title": "Servants of Two Masters", "trailerUrl": "https://www.youtube.com/embed/H4_82h5D62U" }
+                ]
+            }
+        ]
     }
 ]
