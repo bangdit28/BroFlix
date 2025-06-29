@@ -2,18 +2,19 @@
     {
         "id": 1,
         "type": "movie",
-        "title": "The Amateur",
-        "year": "2025",
-        "rating": "7.0",
-        "poster": "https://image.tmdb.org/t/p/original/SNEoUInCa5fAgwuEBMIMBGvkkh.jpg",
+        "title": "Dune: Part Two",
+        "year": "2024",
+        "rating": "9.0",
+        "poster": "https://image.tmdb.org/t/p/w500/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
         "country": "USA",
-        "genre": ["Thriller", "Action"],
-        "quality": "WEBDL",
-        "director": "James Hawes",
-        "cast": "Jon Bernthal, Rachel Brosnahan, Rami Malek",
-        "description": "After his life is turned upside down when his wife is killed in a London terrorist attack, a brilliant but introverted CIA decoder takes matters into his own hands when his supervisors refuse to take action.",
-        "trailerUrl": "https://vidlink.pro/movie/1087891?sub_file=https://raw.githubusercontent.com/bangdit28/BroFlix/blob/main/Subtitle/The.Amateur.2025.1080p.WEB.H264.id.vtt&sub_label=Indonesia",
-        "availableSubtitles": ["Indonesian", "English", "Spanish"]
+        "genre": ["Sci-Fi", "Adventure"],
+        "quality": "HD",
+        "director": "Denis Villeneuve",
+        "cast": "Timothée Chalamet, Zendaya, Rebecca Ferguson",
+        "description": "Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.",
+        "trailerUrl": "https://www.youtube.com/embed/waybbAcdryg",
+        "availableSubtitles": ["Indonesian", "English", "Spanish"],
+        "keywords": ["timothee chalamet", "zendaya", "denis villeneuve", "spice", "sandworm", "arrakis", "fremen", "sci-fi"]
     },
     {
         "id": 2,
@@ -28,6 +29,7 @@
         "cast": "Ella Purnell, Aaron Moten, Walton Goggins",
         "description": "In a future, post-apocalyptic Los Angeles brought about by nuclear decimation, citizens must live in underground bunkers to protect themselves from radiation, mutants and bandits.",
         "availableSubtitles": ["Indonesian", "English", "German"],
+        "keywords": ["ella purnell", "walton goggins", "post-apocalyptic", "video game", "vault", "ghoul", "nuclear", "wasteland"],
         "seasons": [
             {
                 "season": 1,
@@ -53,7 +55,8 @@
         "cast": "Putthipong Assaratanakul, Usha Seamkhum",
         "description": "A young man quits his job to look after his dying grandmother, with a secret agenda to inherit her fortune.",
         "trailerUrl": "https://www.youtube.com/embed/Npo_aG4a3aI",
-        "availableSubtitles": ["Indonesian", "English"]
+        "availableSubtitles": ["Indonesian", "English"],
+        "keywords": ["lan yai", "thailand", "nenek", "keluarga", "warisan", "billkin", "drama", "sedih"]
     },
     {
         "id": 4,
@@ -68,6 +71,7 @@
         "cast": "Hiroyuki Sanada, Cosmo Jarvis, Anna Sawai",
         "description": "Set in the year 1600, at the dawn of a century-defining civil war, Lord Yoshii Toranaga is fighting for his life as his enemies on the Council of Regents unite against him.",
         "availableSubtitles": ["Indonesian", "English", "Japanese"],
+        "keywords": ["hiroyuki sanada", "samurai", "japan", "feudal", "anjin", "toranaga", "history"],
         "seasons": [
             {
                 "season": 1,
