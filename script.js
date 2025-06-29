@@ -24,7 +24,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         content.forEach(item => {
             const qualityBadgeHTML = item.quality ? `<div class="quality-badge quality-${item.quality.toLowerCase()}">${item.quality}</div>` : '';
             const detailPage = item.type === 'series' ? 'detail-series.html' : 'detail-film.html';
-            const card = `<div class="col"><a href="${detailPage}?id=${item.id}" class="movie-card d-block text-decoration-none text-white">${qualityBadgeHTML}<img src="${item.poster}" alt="${item.title}" loading="lazy"></a></div>`;
+            
+            // --- UPDATE UTAMA DI SINI ---
+            // Kode untuk membuat kartu film sekarang menyertakan div untuk info judul.
+            const card = `
+                <div class="col">
+                    <a href="${detailPage}?id=${item.id}" class="movie-card d-block text-decoration-none text-white">
+                        ${qualityBadgeHTML}
+                        <img src="${item.poster}" alt="${item.title}" loading="lazy">
+                        <div class="card-info">
+                            <h6 class="movie-title">${item.title}</h6>
+                        </div>
+                    </a>
+                </div>`;
+            // --- AKHIR UPDATE ---
+
             gridElement.innerHTML += card;
         });
     }
@@ -95,8 +109,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             allContent = await response.json();
             
-            const latestMovies = allContent.filter(item => item.type === 'movie').reverse();
-            const popularSeries = allContent.filter(item => item.type === 'series').reverse();
+            const latestMovies = allContent.filter(item => item.type === 'movie').sort((a,b) => b.id - a.id); // Urutkan dari yg terbaru
+            const popularSeries = allContent.filter(item => item.type === 'series').sort((a,b) => b.id - a.id); // Urutkan dari yg terbaru
             displayContent(latestMovies, latestGrid);
             displayContent(popularSeries, popularSeriesGrid);
 
