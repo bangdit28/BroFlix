@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const seriesTitle = document.getElementById('series-title');
     const seriesDescription = document.getElementById('series-description');
-    const seasonTabs = document.getElementById('season-tabs');
+    const seriesPoster = document.getElementById('series-poster');
+    const seriesCast = document.getElementById('series-cast');
+    const seriesGenre = document.getElementById('series-genre');
+    const seasonSelector = document.getElementById('season-selector');
     const episodeList = document.getElementById('episode-list');
     const videoPlayer = document.getElementById('video-player');
 
@@ -18,57 +21,52 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!series || series.type !== 'series') return;
 
-        // Isi Info Umum
         document.title = `Watching ${series.title} - BroFlix`;
         seriesTitle.textContent = series.title;
         seriesDescription.textContent = series.description;
+        seriesPoster.src = series.poster;
+        seriesCast.textContent = series.cast;
+        seriesGenre.textContent = series.genre.join(', ');
         
-        // Fungsi untuk menampilkan episode
         function showEpisodes(seasonNumber) {
             const seasonData = series.seasons.find(s => s.season == seasonNumber);
             episodeList.innerHTML = '';
+            if (!seasonData) return;
+            
             seasonData.episodes.forEach(ep => {
-                episodeList.innerHTML += `<a href="#" class="list-group-item list-group-item-action" data-url="${ep.trailerUrl}">Episode ${ep.episode}: ${ep.title}</a>`;
-            });
-
-            // Tambah event listener ke episode yang baru dibuat
-            episodeList.querySelectorAll('a').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    // Hapus kelas active dari episode lain
-                    episodeList.querySelectorAll('a').forEach(i => i.classList.remove('active'));
-                    // Tambahkan active ke yang diklik
+                const epBtn = document.createElement('button');
+                epBtn.className = 'btn episode-btn';
+                epBtn.textContent = ep.episode;
+                epBtn.dataset.url = ep.videoUrl;
+                epBtn.dataset.ep = ep.episode;
+                episodeList.appendChild(epBtn);
+                
+                epBtn.addEventListener('click', (e) => {
+                    episodeList.querySelectorAll('.episode-btn').forEach(btn => btn.classList.remove('active'));
                     e.target.classList.add('active');
                     videoPlayer.src = e.target.dataset.url + "?autoplay=1";
                 });
             });
-            
-            // Otomatis putar episode pertama di season itu
-            if (episodeList.firstChild) {
-                episodeList.firstChild.click();
-            }
+            if (episodeList.firstChild) episodeList.firstChild.click();
         }
 
-        // Buat Tab Season
-        series.seasons.forEach((season, index) => {
-            const isActive = index === 0 ? 'active' : '';
-            seasonTabs.innerHTML += `<li class="nav-item"><a class="nav-link ${isActive}" data-season="${season.season}" href="#">Season ${season.season}</a></li>`;
+        let seasonDropdownHTML = '<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Season 1</button><ul class="dropdown-menu">';
+        series.seasons.forEach(season => {
+            seasonDropdownHTML += `<li><a class="dropdown-item" href="#" data-season="${season.season}">Season ${season.season}</a></li>`;
         });
-        
-        // Tambah event listener ke tab season
-        seasonTabs.querySelectorAll('a').forEach(tab => {
-            tab.addEventListener('click', (e) => {
+        seasonDropdownHTML += '</ul>';
+        seasonSelector.innerHTML = seasonDropdownHTML;
+
+        const mainButton = seasonSelector.querySelector('.btn');
+        seasonSelector.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', (e) => {
                 e.preventDefault();
-                seasonTabs.querySelectorAll('a').forEach(t => t.classList.remove('active'));
-                e.target.classList.add('active');
+                mainButton.textContent = e.target.textContent;
                 showEpisodes(e.target.dataset.season);
             });
         });
         
-        // Tampilkan episode untuk season pertama secara default
         showEpisodes(series.seasons[0].season);
 
-    } catch (error) {
-        console.error("Error loading series data:", error);
-    }
+    } catch (error) { console.error("Error:", error); }
 });
