@@ -44,6 +44,29 @@
                     { "episode": 8, "title": "Front Man", "videoUrl": "https://vidlink.pro/tv/93405/1/8" },
                     { "episode": 9, "title": "One Lucky Day", "videoUrl": "https://vidlink.pro/tv/93405/1/9" }
                 ]
+            },
+            {
+                "season": 2,
+                "episodes": [
+                    { "episode": 1, "title": "Bread and Lottery", "videoUrl": "https://vidlink.pro/tv/93405/2/1" },
+                    { "episode": 2, "title": "Halloween Party", "videoUrl": "https://vidlink.pro/tv/93405/2/2" },
+                    { "episode": 3, "title": "001", "videoUrl": "https://vidlink.pro/tv/93405/2/3" },
+                    { "episode": 4, "title": "Six Legs", "videoUrl": "https://vidlink.pro/tv/93405/2/4" },
+                    { "episode": 5, "title": "One More Game", "videoUrl": "https://vidlink.pro/tv/93405/2/5" },
+                    { "episode": 6, "title": "O ﻿ X", "videoUrl": "https://vidlink.pro/tv/93405/2/6" },
+                    { "episode": 7, "title": "Friend or Foe", "videoUrl": "https://vidlink.pro/tv/93405/2/7" }
+                ]
+            },
+            {
+                "season": 3,
+                "episodes": [
+                    { "episode": 1, "title": "Keys and Knives", "videoUrl": "https://vidlink.pro/tv/93405/3/1" },
+                    { "episode": 2, "title": "The Starry Night", "videoUrl": "https://vidlink.pro/tv/93405/3/2" },
+                    { "episode": 3, "title": "It's Not Your Fault", "videoUrl": "https://vidlink.pro/tv/93405/3/3" },
+                    { "episode": 4, "title": "222", "videoUrl": "https://vidlink.pro/tv/93405/3/4" },
+                    { "episode": 5, "title": "○△□", "videoUrl": "https://vidlink.pro/tv/93405/3/5" },
+                    { "episode": 6, "title": "Humans Are...", "videoUrl": "https://vidlink.pro/tv/93405/3/6" }
+                ]
             }
         ]
     },
