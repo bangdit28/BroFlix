@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watching - BroFlix</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #141414; color: #fff; }
+        .info-label { font-weight: 600; color: #adb5bd; } /* Teks abu-abu untuk label */
+        .info-value { color: #fff; }
+        .badge-subtitle {
+            background-color: #343a40;
+            border: 1px solid #6c757d;
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container mt-4">
+        <div class="row">
+            <!-- YouTube Player -->
+            <div class="col-12">
+                <div class="ratio ratio-16x9">
+                    <iframe 
+                        id="youtube-player"
+                        src="" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Info Film -->
+            <div class="col-md-8">
+                <h1 id="movie-title" class="fw-bold">Loading...</h1>
+                <p id="movie-description" class="text-secondary"></p>
+                <hr>
+                <div class="row">
+                    <div class="col-12 mb-2"><span class="info-label">Director:</span> <span id="movie-director" class="info-value"></span></div>
+                    <div class="col-12 mb-2"><span class="info-label">Cast:</span> <span id="movie-cast" class="info-value"></span></div>
+                    <div class="col-12 mb-2"><span class="info-label">Genre:</span> <span id="movie-genre" class="info-value"></span></div>
+                    <div class="col-12 mb-2"><span class="info-label">Quality:</span> <span id="movie-quality" class="info-value"></span></div>
+                    
+                    <!-- BAGIAN SUBTITLE YANG TERSEDIA -->
+                    <div class="col-12 mb-2">
+                        <span class="info-label">Subtitles:</span>
+                        <span id="movie-subtitles" class="info-value">
+                            <!-- Daftar subtitle akan muncul di sini sebagai badge -->
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Poster -->
+            <div class="col-md-4 d-none d-md-block">
+                <img id="movie-poster" src="" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <a href="index.html" class="btn btn-outline-light">← Back to Home</a>
+        </div>
+    </main>
+    
+    <!-- Kita akan menamai script ini 'detail.js' -->
+    <script src="detail.js"></script>
+
+</body>
+</html>
