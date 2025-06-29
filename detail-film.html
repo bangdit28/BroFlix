@@ -14,33 +14,14 @@
         .info-label { font-weight: 600; color: #adb5bd; }
         .info-value { color: #fff; }
         .badge-subtitle { background-color: #343a40; border: 1px solid #6c757d; color: #f8f9fa; }
-        
-        /* Gaya untuk Player Placeholder */
-        #player-placeholder {
-            background-color: #000;
-            background-size: cover;
-            background-position: center;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #player-placeholder .play-icon {
-            font-size: 80px;
-            color: rgba(255, 255, 255, 0.7);
-            transition: transform 0.2s ease;
-        }
-        #player-placeholder:hover .play-icon {
-            transform: scale(1.1);
-            color: #fff;
-        }
+        #player-placeholder { background-color: #000; background-size: cover; background-position: center; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+        #player-placeholder .play-icon { font-size: 80px; color: rgba(255, 255, 255, 0.7); transition: transform 0.2s ease; }
+        #player-placeholder:hover .play-icon { transform: scale(1.1); color: #fff; }
     </style>
 </head>
 <body>
 
-    <!-- ====================================================== -->
     <!-- MODAL POPUP IKLAN -->
-    <!-- ====================================================== -->
     <div class="modal fade" id="adModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-white">
@@ -50,8 +31,6 @@
                 <div class="modal-body text-center">
                     <p>To watch the movie, please click the ad button below. A new tab will open.</p>
                     <p class="small text-warning">After clicking, you can close the new tab and return here to watch.</p>
-                    
-                    <!-- TOMBOL IKLAN UTAMA -->
                     <a id="ad-link-button" href="https://link-iklan-directlink-kamu.com" target="_blank" class="btn btn-lg btn-success w-100">
                         <i class="fas fa-play-circle me-2"></i> CLICK AD & PLAY MOVIE
                     </a>
@@ -60,31 +39,16 @@
         </div>
     </div>
 
-
     <main class="container mt-4">
         <div class="row">
-            <!-- Video Player Area -->
             <div class="col-12">
                 <div class="ratio ratio-16x9">
-                    <!-- Placeholder sebelum iklan diklik -->
-                    <div id="player-placeholder">
-                        <i class="fas fa-play-circle play-icon"></i>
-                    </div>
-                    <!-- Player Asli (disembunyikan) -->
-                    <iframe 
-                        id="youtube-player"
-                        class="d-none" 
-                        src="" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                    <div id="player-placeholder"><i class="fas fa-play-circle play-icon"></i></div>
+                    <iframe id="youtube-player" class="d-none" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
-        <!-- Info Film (Tidak ada perubahan di sini) -->
         <div class="row mt-4">
             <div class="col-md-8">
                 <h1 id="movie-title" class="fw-bold">Loading...</h1>
@@ -107,7 +71,6 @@
         </div>
     </main>
     
-    <!-- Bootstrap JS (Penting untuk Modal) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="detail.js"></script>
 
