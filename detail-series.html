@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+        <style>
         body { font-family: 'Poppins', sans-serif; background-color: #141414; color: #fff; }
         .section-title { color: #fff; font-weight: 600; margin-bottom: 1.5rem; border-left: 4px solid #e50914; padding-left: 1rem; }
         .info-label { font-weight: 600; color: #adb5bd; }
@@ -20,23 +20,46 @@
         #player-placeholder { background-color: #000; background-size: cover; background-position: center; cursor: pointer; display: flex; justify-content: center; align-items: center; }
         #player-placeholder .play-icon { font-size: 80px; color: rgba(255, 255, 255, 0.7); }
         
-        /* Gaya Baru untuk Panel Episode */
+        /* Gaya untuk Panel Episode */
         .episode-section {
             background-color: #1a1a1a;
             padding: 1rem;
             border-radius: 8px;
         }
+
+        /* Gaya untuk Tombol Dropdown Season */
         .dropdown .btn {
-            background-color: #2b2b2b; /* Warna abu-abu gelap */
+            background-color: #2b2b2b;
             border-color: #444;
-            color: #fff;
+            color: #fff; /* Pastikan tombol utamanya juga putih */
         }
         .dropdown .btn:hover { background-color: #3c3c3c; }
-        .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
-        .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
         
+        /* ======================================================= */
+        /* PEMBARUAN UTAMA ADA DI SINI */
+        /* ======================================================= */
+        
+        /* Background Menu Dropdown */
+        .dropdown .dropdown-menu { 
+            background-color: #222; 
+            border-color: #444; 
+        }
+
+        /* Teks Item di Dalam Dropdown (INI KUNCINYA) */
+        .dropdown .dropdown-item {
+            color: #f8f9fa; /* Membuat teks jadi PUTIH */
+        }
+        
+        /* Warna Saat Item di-Hover atau Aktif */
+        .dropdown .dropdown-item:hover, 
+        .dropdown .dropdown-item.active { 
+            background-color: #e50914; /* Warna merah Netflix */
+            color: #fff; /* Pastikan teks tetap putih saat background merah */
+        }
+        
+        /* Gaya untuk Tombol Episode */
         .episode-btn {
-            background-color: #2b2b2b; /* Warna abu-abu gelap */
+            background-color: #2b2b2b;
             border-color: #444;
             color: #fff;
             flex-shrink: 0;
