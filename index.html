@@ -14,16 +14,42 @@
         .navbar { background-color: #141414 !important; }
         .navbar-brand { color: #e50914 !important; font-weight: 700; font-size: 1.8rem; }
         .filter-section { background-color: #1a1a1a; padding: 1rem 0; }
-        /* Style untuk Dropdown */
         .dropdown .btn { background-color: #333; border-color: #444; }
         .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
         .dropdown .dropdown-item { color: #fff; }
         .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; color: #fff; }
-        .movie-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; background-color: #222; }
+        
+        .movie-card { 
+            position: relative; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            transition: transform 0.3s ease; 
+            background-color: #222; 
+        }
         .movie-card:hover { transform: scale(1.05); }
         .movie-card img { width: 100%; display: block; aspect-ratio: 2 / 3; object-fit: cover; }
         .movie-card .movie-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0)); padding: 1rem; }
         .movie-card h5 { font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* CSS UNTUK LABEL KUALITAS */
+        .quality-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            z-index: 2;
+        }
+        .quality-hd { background-color: #28a745; } /* Hijau */
+        .quality-cam { background-color: #dc3545; } /* Merah */
+        .quality-sd { background-color: #17a2b8; } /* Biru muda */
+        .quality-4k { background-color: #ffc107; color: #000; text-shadow: none; } /* Emas */
+
         .footer { background-color: #000; color: #808080; }
     </style>
 </head>
@@ -47,9 +73,7 @@
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Genre
                 </button>
-                <ul class="dropdown-menu" id="genre-dropdown-menu">
-                    <!-- Pilihan genre akan di-generate oleh JS -->
-                </ul>
+                <ul class="dropdown-menu" id="genre-dropdown-menu"></ul>
             </div>
             
             <!-- Dropdown untuk Negara -->
@@ -57,9 +81,7 @@
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Country
                 </button>
-                <ul class="dropdown-menu" id="country-dropdown-menu">
-                    <!-- Pilihan negara akan di-generate oleh JS -->
-                </ul>
+                <ul class="dropdown-menu" id="country-dropdown-menu"></ul>
             </div>
         </div>
     </header>
@@ -76,7 +98,6 @@
         <p class="mb-1">© 2024 BroFlix.</p>
     </footer>
 
-    <!-- Bootstrap JS (Penting untuk Dropdown) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
