@@ -19,24 +19,30 @@
     {
         "id": 2,
         "type": "series",
-        "title": "Fallout",
-        "year": "2024",
-        "rating": "8.9",
-        "poster": "https://image.tmdb.org/t/p/w500/gqCCr2I1s22adD2iRoA120RmcJ5.jpg",
-        "country": "USA",
-        "genre": ["Sci-Fi", "Action", "Drama"],
-        "quality": "4K",
-        "cast": "Ella Purnell, Aaron Moten, Walton Goggins",
-        "description": "In a future, post-apocalyptic Los Angeles brought about by nuclear decimation, citizens must live in underground bunkers to protect themselves from radiation, mutants and bandits.",
+        "title": "Squid Game (2021)",
+        "year": "2021",
+        "rating": "7.9",
+        "poster": "https://image.tmdb.org/t/p/original/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+        "country": "South Korea",
+        "genre": ["Action", "Mystery", "Drama"],
+        "quality": "HD",
+        "cast": "Lee Jung-jae, Wi Ha-jun, Lee Byung-hun",
+        "description": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.",
         "availableSubtitles": ["Indonesian", "English", "German"],
-        "keywords": ["ella purnell", "walton goggins", "post-apocalyptic", "video game", "vault", "ghoul", "nuclear", "wasteland"],
+        "keywords": ["secret organization", "challenge", "survival", "fictional game show", "cruelty", "game", "death match", "prize", "hopeless", "grim", "desperate", "anxious", "cautionary", "suspense", "death game", "thriller", "depressing", "disheartening", "tragic"],
         "seasons": [
             {
                 "season": 1,
                 "episodes": [
-                    { "episode": 1, "title": "The End", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
-                    { "episode": 2, "title": "The Target", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" },
-                    { "episode": 3, "title": "The Head", "videoUrl": "https://www.youtube.com/embed/V-ueI_M2I3A" }
+                    { "episode": 1, "title": "Red Light, Green Light", "videoUrl": "https://vidlink.pro/tv/93405/1/1" },
+                    { "episode": 2, "title": "Hell", "videoUrl": "https://vidlink.pro/tv/93405/1/2" },
+                    { "episode": 3, "title": "The Man with the Umbrella", "videoUrl": "https://vidlink.pro/tv/93405/1/3" }
+                    { "episode": 4, "title": "Stick to the Team", "videoUrl": "https://vidlink.pro/tv/93405/1/4" },
+                    { "episode": 5, "title": "A Fair World", "videoUrl": "https://vidlink.pro/tv/93405/1/5" },
+                    { "episode": 6, "title": "Gganbu", "videoUrl": "https://vidlink.pro/tv/93405/1/6" }
+                    { "episode": 7, "title": "VIPS", "videoUrl": "https://vidlink.pro/tv/93405/1/7" },
+                    { "episode": 8, "title": "Front Man", "videoUrl": "https://vidlink.pro/tv/93405/1/8" },
+                    { "episode": 9, "title": "One Lucky Day", "videoUrl": "https://vidlink.pro/tv/93405/1/9" }
                 ]
             }
         ]
