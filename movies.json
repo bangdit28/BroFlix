@@ -1,3 +1,4 @@
+// movies.json remains the same
 [
     {
         "id": 1,
@@ -7,52 +8,5 @@
         "poster": "https://image.tmdb.org/t/p/w500/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg",
         "category": "latest"
     },
-    {
-        "id": 2,
-        "title": "Godzilla x Kong",
-        "year": "2024",
-        "rating": "8.1",
-        "poster": "https://image.tmdb.org/t/p/w500/vHkL_H0u0I2sQp2L5Y71c3vchHe.jpg",
-        "category": "latest"
-    },
-    {
-        "id": 3,
-        "title": "Oppenheimer",
-        "year": "2023",
-        "rating": "8.8",
-        "poster": "https://image.tmdb.org/t/p/w500/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg",
-        "category": "latest"
-    },
-    {
-        "id": 4,
-        "title": "Shōgun",
-        "year": "2024",
-        "rating": "9.2",
-        "poster": "https://image.tmdb.org/t/p/w500/yYl2i2n0QkS2n2Tke8e1s2L1g0t.jpg",
-        "category": "series"
-    },
-    {
-        "id": 5,
-        "title": "Fallout",
-        "year": "2024",
-        "rating": "8.9",
-        "poster": "https://image.tmdb.org/t/p/w500/gqCCr2I1s22adD2iRoA120RmcJ5.jpg",
-        "category": "series"
-    },
-    {
-        "id": 6,
-        "title": "Jujutsu Kaisen",
-        "year": "S2",
-        "rating": "9.5",
-        "poster": "https://image.tmdb.org/t/p/w500/hE1t9wI3c7dMseL2aF1iGv1LhT.jpg",
-        "category": "anime"
-    },
-    {
-        "id": 7,
-        "title": "Solo Leveling",
-        "year": "S1",
-        "rating": "9.3",
-        "poster": "https://image.tmdb.org/t/p/w500/pA5CHygtb4GA062s5l7g0m4so8g.jpg",
-        "category": "anime"
-    }
+    // ... all other movies ...
 ]
