@@ -18,15 +18,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!gridElement) return;
         gridElement.innerHTML = '';
         if (!content || content.length === 0) {
-            gridElement.innerHTML = '<p class="text-secondary">No content found.</p>';
+            gridElement.innerHTML = '<p class="text-secondary text-center">No content found matching your criteria.</p>';
             return;
         }
         content.forEach(item => {
             const qualityBadgeHTML = item.quality ? `<div class="quality-badge quality-${item.quality.toLowerCase()}">${item.quality}</div>` : '';
             const detailPage = item.type === 'series' ? 'detail-series.html' : 'detail-film.html';
             
-            // --- UPDATE UTAMA DI SINI ---
-            // Kode untuk membuat kartu film sekarang menyertakan div untuk info judul.
             const card = `
                 <div class="col">
                     <a href="${detailPage}?id=${item.id}" class="movie-card d-block text-decoration-none text-white">
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                     </a>
                 </div>`;
-            // --- AKHIR UPDATE ---
 
             gridElement.innerHTML += card;
         });
@@ -75,13 +72,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         let filtered = allContent.filter(item => {
-            const genreMatch = item.genre ? item.genre.includes(activeGenre) : false;
-            const countryMatch = item.country ? item.country === activeCountry : false;
-            const titleMatch = item.title ? item.title.toLowerCase().includes(searchTerm) : false;
+            const genreMatch = activeGenre === 'all' || (item.genre && item.genre.includes(activeGenre));
+            const countryMatch = activeCountry === 'all' || (item.country && item.country === activeCountry);
+            
+            // --- LOGIKA PENCARIAN DIPERBARUI DI SINI ---
+            const searchMatch = searchTerm.trim() === '' || 
+                                (item.title && item.title.toLowerCase().includes(searchTerm)) ||
+                                (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm)));
+            // --- AKHIR PEMBARUAN LOGIKA PENCARIAN ---
 
-            return (activeGenre === 'all' || genreMatch) &&
-                   (activeCountry === 'all' || countryMatch) &&
-                   titleMatch;
+            return genreMatch && countryMatch && searchMatch;
         });
         displayContent(filtered, movieGrid);
     }
@@ -94,11 +94,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (genreButton) genreButton.textContent = "Genre";
         if (countryButton) countryButton.textContent = "Country";
         if (genreDropdownMenu) {
-            genreDropdownMenu.querySelector('.dropdown-item.active')?.classList.remove('active');
+            genreDropdownMenu.querySelectorAll('.dropdown-item.active').forEach(i => i.classList.remove('active'));
             genreDropdownMenu.querySelector('[data-filter="all"]')?.classList.add('active');
         }
         if (countryDropdownMenu) {
-            countryDropdownMenu.querySelector('.dropdown-item.active')?.classList.remove('active');
+            countryDropdownMenu.querySelectorAll('.dropdown-item.active').forEach(i => i.classList.remove('active'));
             countryDropdownMenu.querySelector('[data-filter="all"]')?.classList.add('active');
         }
     }
@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             allContent = await response.json();
             
-            const latestMovies = allContent.filter(item => item.type === 'movie').sort((a,b) => b.id - a.id); // Urutkan dari yg terbaru
-            const popularSeries = allContent.filter(item => item.type === 'series').sort((a,b) => b.id - a.id); // Urutkan dari yg terbaru
+            const latestMovies = allContent.filter(item => item.type === 'movie').sort((a,b) => b.id - a.id);
+            const popularSeries = allContent.filter(item => item.type === 'series').sort((a,b) => b.id - a.id);
             displayContent(latestMovies, latestGrid);
             displayContent(popularSeries, popularSeriesGrid);
 
