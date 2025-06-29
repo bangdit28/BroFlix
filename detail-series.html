@@ -17,18 +17,43 @@
         #player-placeholder { background-color: #000; background-size: cover; background-position: center; cursor: pointer; display: flex; justify-content: center; align-items: center; }
         #player-placeholder .play-icon { font-size: 80px; color: rgba(255, 255, 255, 0.7); }
         
-        .episode-section { background-color: #1a1a1a; padding: 1rem; border-radius: 8px; }
-        .dropdown .btn { background-color: #3d3d3d; border-color: #555; }
+        /* Gaya Baru untuk Panel Episode */
+        .episode-section {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .dropdown .btn {
+            background-color: #2b2b2b; /* Warna abu-abu gelap */
+            border-color: #444;
+            color: #fff;
+        }
+        .dropdown .btn:hover { background-color: #3c3c3c; }
         .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
         .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
-        .episode-btn { background-color: #2b2b2b; border-color: #444; }
-        .episode-btn.active, .episode-btn:hover { background-color: #e50914; border-color: #e50914; }
-        .episode-list { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 10px; }
+        
+        .episode-btn {
+            background-color: #2b2b2b; /* Warna abu-abu gelap */
+            border-color: #444;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .episode-btn.active, .episode-btn:hover {
+            background-color: #e50914;
+            border-color: #e50914;
+        }
+        .episode-list {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
         .episode-list::-webkit-scrollbar { height: 6px; }
         .episode-list::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
     </style>
 </head>
 <body>
+    <!-- MODAL POPUP IKLAN (Tidak berubah) -->
     <div class="modal fade" id="adModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-white">
@@ -42,6 +67,7 @@
     </div>
 
     <main class="container mt-4">
+        <!-- Player -->
         <div class="row">
             <div class="col-12"><div class="ratio ratio-16x9">
                 <div id="player-placeholder"><i class="fas fa-play-circle play-icon"></i></div>
@@ -49,15 +75,27 @@
             </div></div>
         </div>
 
+        <!-- Bagian Pemilihan Season & Episode (STRUKTUR BARU) -->
         <div class="row mt-3">
             <div class="col-12 episode-section">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="dropdown" id="season-selector"></div>
-                    <div class="episode-list flex-grow-1" id="episode-list"></div>
+                <!-- Baris untuk Season -->
+                <div class="mb-3">
+                    <label class="form-label info-label">Select Season:</label>
+                    <div class="dropdown" id="season-selector">
+                        <!-- Dropdown Season akan di-generate JS -->
+                    </div>
+                </div>
+                <!-- Baris untuk Episode -->
+                <div>
+                    <label class="form-label info-label">Select Episode:</label>
+                    <div class="episode-list" id="episode-list">
+                        <!-- Tombol Episode akan di-generate JS -->
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Info Detail Series (Tidak berubah) -->
         <div class="row mt-4">
             <div class="col-12"><h2 class="section-title">Series Info</h2></div>
             <div class="col-md-3 d-none d-md-block"><img id="series-poster" src="" class="img-fluid rounded"></div>
