@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroFlix - Watch Movies & Series Online</title>
+    <title>BroFlix - Nonton Film & Series</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -11,95 +11,69 @@
 
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #141414; color: #fff; padding-top: 70px; }
-        .navbar { background-color: #141414 !important; }
-        .navbar-brand { color: #e50914 !important; font-weight: 700; font-size: 1.8rem; }
-        .filter-section { background-color: #1a1a1a; padding: 1rem 0; }
-        .dropdown .btn { background-color: #333; border-color: #444; }
+        .navbar, .filter-section { background-color: #141414 !important; }
+        .navbar-brand { color: #e50914 !important; font-weight: 700; }
+        .section-title { color: #fff; font-weight: 600; margin-bottom: 1.5rem; border-left: 4px solid #e50914; padding-left: 1rem; }
+        .dropdown .btn, .btn-home, .btn-request { background-color: #2b2b2b; border-color: #444; color: #fff; }
+        .dropdown .btn:hover, .btn-home:hover, .btn-request:hover { background-color: #3c3c3c; }
         .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
         .dropdown .dropdown-item { color: #fff; }
-        .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; color: #fff; }
-        
-        .movie-card { 
-            position: relative; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            cursor: pointer; 
-            transition: transform 0.3s ease; 
-            background-color: #222; 
-        }
+        .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
+        .movie-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease; background-color: #222; }
         .movie-card:hover { transform: scale(1.05); }
         .movie-card img { width: 100%; display: block; aspect-ratio: 2 / 3; object-fit: cover; }
-        .movie-card .movie-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0)); padding: 1rem; }
-        .movie-card h5 { font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        /* CSS UNTUK LABEL KUALITAS */
-        .quality-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-            z-index: 2;
-        }
-        .quality-hd { background-color: #28a745; } /* Hijau */
-        .quality-cam { background-color: #dc3545; } /* Merah */
-        .quality-sd { background-color: #17a2b8; } /* Biru muda */
-        .quality-4k { background-color: #ffc107; color: #000; text-shadow: none; } /* Emas */
-
-        .footer { background-color: #000; color: #808080; }
+        .quality-badge { position: absolute; top: 8px; right: 8px; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #fff; z-index: 2; }
+        .quality-hd { background-color: #28a745; }
+        .quality-cam { background-color: #dc3545; }
+        .quality-sd { background-color: #17a2b8; }
+        .quality-4k { background-color: #ffc107; color: #000; }
     </style>
 </head>
 <body>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">BROFLIX</a>
-            <form class="d-flex w-50" id="search-form">
-                <input id="search-input" class="form-control me-2 bg-dark text-white border-secondary" type="search" placeholder="Search title...">
-            </form>
+            <form class="d-flex w-50" id="search-form"><input id="search-input" class="form-control me-2 bg-dark text-white border-secondary" type="search" placeholder="Search..."></form>
+            <a href="mailto:emailkamu@gmail.com?subject=Request%20Movie/Series" class="btn btn-request ms-2 d-none d-lg-block">Request Movie</a>
         </div>
     </nav>
-    
-    <!-- Filter Section (Struktur Dropdown) -->
+
+    <!-- Kategori & Filter -->
     <header class="filter-section pt-5">
-        <div class="container d-flex gap-2">
-            <!-- Dropdown untuk Genre -->
-            <div class="dropdown" id="genre-filter-container">
-                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Genre
-                </button>
-                <ul class="dropdown-menu" id="genre-dropdown-menu"></ul>
-            </div>
-            
-            <!-- Dropdown untuk Negara -->
-            <div class="dropdown" id="country-filter-container">
-                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Country
-                </button>
-                <ul class="dropdown-menu" id="country-dropdown-menu"></ul>
+        <div class="container">
+            <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-home" id="home-button">Home</button>
+                <div class="dropdown" id="genre-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Genre</button><ul class="dropdown-menu" id="genre-dropdown-menu"></ul></div>
+                <div class="dropdown" id="country-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Country</button><ul class="dropdown-menu" id="country-dropdown-menu"></ul></div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content: Movie Grid -->
+    <!-- Main Content -->
     <main class="container mt-4">
-        <div id="movie-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
-            <!-- Film akan muncul di sini... -->
-        </div>
-    </main>
+        <!-- Seksi Film Terbaru -->
+        <section id="latest-movies-section">
+            <h2 class="section-title">Terbaru</h2>
+            <div id="latest-movies-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4"></div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer text-center py-4 mt-5">
-        <p class="mb-1">© 2024 BroFlix.</p>
-    </footer>
+        <!-- Seksi Series Populer -->
+        <section id="popular-series-section" class="mt-5">
+            <h2 class="section-title">Series Populer</h2>
+            <div id="popular-series-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4"></div>
+        </section>
+        
+        <!-- Seksi Semua Film (untuk filter) -->
+        <section id="all-movies-section" class="mt-5">
+            <h2 class="section-title" id="all-movies-title">All Movies & Series</h2>
+            <div id="movie-grid" class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4"></div>
+        </section>
+    </main>
+    
+    <footer class="text-center py-4 mt-5"><p>© 2024 BroFlix.</p></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-
 </body>
 </html>
