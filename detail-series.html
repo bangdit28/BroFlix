@@ -8,42 +8,102 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #141414; color: #fff; }
+        
+        /* Layout & Info */
         .info-label { font-weight: 600; color: #adb5bd; }
         .info-value { color: #fff; }
-        .dropdown .btn { background-color: #2b2b2b; border-color: #444; }
-        .episode-btn { background-color: #2b2b2b; border-color: #444; color: #fff; }
-        .episode-btn.active, .episode-btn:hover { background-color: #e50914; border-color: #e50914; }
-        .episode-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .section-title { color: #fff; font-weight: 600; margin-bottom: 1.5rem; border-left: 4px solid #e50914; padding-left: 1rem; }
+
+        /* Episode & Season Selector Styling */
+        .episode-section {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .dropdown .btn {
+            background-color: #3d3d3d; /* Warna lebih terang */
+            border-color: #555;
+            color: #fff;
+        }
+        .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
+        .dropdown .dropdown-item { color: #fff; }
+        .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
+
+        .episode-btn {
+            background-color: #2b2b2b;
+            border-color: #444;
+            color: #fff;
+            flex-shrink: 0; /* Mencegah tombol jadi kecil */
+        }
+        .episode-btn.active, .episode-btn:hover {
+            background-color: #e50914;
+            border-color: #e50914;
+        }
+        .episode-list {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto; /* Bisa di-scroll horizontal jika episode banyak */
+            padding-bottom: 10px; /* Jarak untuk scrollbar */
+        }
+        /* Style untuk scrollbar (opsional, biar keren) */
+        .episode-list::-webkit-scrollbar { height: 6px; }
+        .episode-list::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+        .episode-list::-webkit-scrollbar-track { background: #1a1a1a; }
     </style>
 </head>
 <body>
     <main class="container mt-4">
+        <!-- Player -->
         <div class="row">
-            <div class="col-12"><div class="ratio ratio-16x9"><iframe id="video-player" src="" title="Video player" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div></div>
+            <div class="col-12">
+                <div class="ratio ratio-16x9">
+                    <iframe id="video-player" src="" title="Video player" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
+
+        <!-- Bagian Pemilihan Season & Episode (PINDAH KE SINI) -->
+        <div class="row mt-3">
+            <div class="col-12 episode-section">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="dropdown" id="season-selector">
+                        <!-- Dropdown Season akan di-generate JS -->
+                    </div>
+                    <div class="episode-list flex-grow-1" id="episode-list">
+                        <!-- Tombol Episode akan di-generate JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Detail Series (PINDAH KE BAWAH) -->
         <div class="row mt-4">
-            <div class="col-md-3 d-none d-md-block"><img id="series-poster" src="" class="img-fluid rounded"></div>
+            <div class="col-12">
+                <h2 class="section-title">Series Info</h2>
+            </div>
+            <div class="col-md-3 d-none d-md-block">
+                <img id="series-poster" src="" class="img-fluid rounded">
+            </div>
             <div class="col-md-9">
-                <h1 id="series-title">Loading...</h1>
+                <h1 id="series-title" class="fs-2">Loading...</h1>
                 <p id="series-description" class="text-secondary"></p>
                 <hr>
                 <div class="row">
-                    <div class="col-12 mb-2"><span class="info-label">Cast:</span> <span id="series-cast" class="info-value"></span></div>
-                    <div class="col-12 mb-2"><span class="info-label">Genre:</span> <span id="series-genre" class="info-value"></span></div>
+                    <div class="col-12 mb-2">
+                        <span class="info-label">Cast:</span> <span id="series-cast" class="info-value"></span>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <span class="info-label">Genre:</span> <span id="series-genre" class="info-value"></span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="dropdown" id="season-selector"></div>
-                    <div class="episode-list" id="episode-list"></div>
-                </div>
-            </div>
+
+        <div class="text-center my-4">
+            <a href="index.html" class="btn btn-outline-light">← Back to Home</a>
         </div>
-        <div class="text-center my-4"><a href="index.html" class="btn btn-outline-light">← Back to Home</a></div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="detail-series.js"></script>
+    <script src="detail-series.js"></script> <!-- Script ini tidak perlu diubah -->
 </body>
 </html>
