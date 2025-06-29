@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // Ambil semua elemen penting
     const playerPlaceholder = document.getElementById('player-placeholder');
     const videoPlayer = document.getElementById('video-player');
     const adModalElement = document.getElementById('adModal');
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!series || series.type !== 'series') return;
 
-        // --- Mengisi Info Umum ---
         document.title = `Watching ${series.title} - BroFlix`;
         seriesTitle.textContent = series.title;
         seriesDescription.textContent = series.description;
@@ -39,7 +37,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         seriesQuality.textContent = series.quality;
         playerPlaceholder.style.backgroundImage = `url('${series.poster}')`;
 
-        // Mengisi info subtitle
         if (series.availableSubtitles && series.availableSubtitles.length > 0) {
             let subtitleBadges = '';
             series.availableSubtitles.forEach(lang => {
@@ -50,34 +47,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             seriesSubtitles.innerHTML = '<span>Not available</span>';
         }
 
-        // --- LOGIKA IKLAN ---
-        adModal.show(); // Tampilkan popup iklan
+        adModal.show();
         adLinkButton.addEventListener('click', () => {
             adModal.hide();
             playerPlaceholder.classList.add('d-none');
             videoPlayer.classList.remove('d-none');
-            // Video akan mulai saat episode pertama diklik
+            if (episodeList.querySelector('.episode-btn.active')) {
+                videoPlayer.src = episodeList.querySelector('.episode-btn.active').dataset.url + "?autoplay=1";
+            } else if (episodeList.firstChild) {
+                episodeList.firstChild.click();
+            }
         });
         playerPlaceholder.addEventListener('click', () => adModal.show());
 
-
-        // --- LOGIKA SEASON & EPISODE ---
         function showEpisodes(seasonNumber) {
             const seasonData = series.seasons.find(s => s.season == seasonNumber);
             episodeList.innerHTML = '';
             if (!seasonData) return;
             
-            seasonData.episodes.forEach(ep => {
+            seasonData.episodes.forEach((ep, index) => {
                 const epBtn = document.createElement('button');
                 epBtn.className = 'btn episode-btn';
                 epBtn.textContent = ep.episode;
                 epBtn.dataset.url = ep.videoUrl;
+                if (index === 0) epBtn.classList.add('active'); // Set episode 1 sebagai active default
                 episodeList.appendChild(epBtn);
                 
                 epBtn.addEventListener('click', (e) => {
-                    // Cek apakah iklan sudah diklik
                     if (videoPlayer.classList.contains('d-none')) {
-                        adModal.show(); // Jika belum, tampilkan lagi iklannya
+                        adModal.show();
                         return;
                     }
                     episodeList.querySelectorAll('.episode-btn').forEach(btn => btn.classList.remove('active'));
@@ -85,14 +83,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     videoPlayer.src = e.target.dataset.url + "?autoplay=1";
                 });
             });
-            
-            // Otomatis klik episode pertama di season itu, JIKA iklan sudah dilewati
-            if (episodeList.firstChild && !videoPlayer.classList.contains('d-none')) {
-                episodeList.firstChild.click();
-            }
         }
 
-        // Membuat dropdown season
         let seasonDropdownHTML = `<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Season 1</button><ul class="dropdown-menu">`;
         series.seasons.forEach(season => {
             seasonDropdownHTML += `<li><a class="dropdown-item" href="#" data-season="${season.season}">Season ${season.season}</a></li>`;
@@ -107,17 +99,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 mainButton.textContent = e.target.textContent;
                 showEpisodes(e.target.dataset.season);
                 
-                // Otomatis klik episode pertama setelah ganti season
-                if (episodeList.firstChild && !videoPlayer.classList.contains('d-none')) {
+                if (!videoPlayer.classList.contains('d-none') && episodeList.firstChild) {
                     episodeList.firstChild.click();
                 }
             });
         });
         
-        // Tampilkan episode untuk season pertama secara default
         showEpisodes(series.seasons[0].season);
 
-    } catch (error) {
-        console.error("Error:", error);
-    }
+        // Setelah iklan ditutup dan episode pertama belum terpilih, klik
+        adModalElement.addEventListener('hidden.bs.modal', () => {
+             if (episodeList.firstChild && !videoPlayer.src) {
+                episodeList.firstChild.click();
+            }
+        });
+
+    } catch (error) { console.error("Error:", error); }
 });
