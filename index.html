@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BroFlix - Watch Movies & Series</title>
-
     <link rel="icon" type="image/png" href="favicon.png">
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,61 +13,22 @@
         body { font-family: 'Poppins', sans-serif; background-color: #141414; color: #fff; padding-top: 70px; }
         .navbar, .filter-section { background-color: #141414 !important; }
         .navbar-brand { color: #e50914 !important; font-weight: 700; }
-        .section-title { color: #fff; font-weight: 600; margin-bottom: 1.5rem; border-left: 4px solid #e50914; padding-left: 1rem; }
+        .section-title { color: #fff; font-weight: 600; border-left: 4px solid #e50914; padding-left: 1rem; }
         .dropdown .btn, .btn-home, .btn-request { background-color: #2b2b2b; border-color: #444; color: #fff; }
         .dropdown .btn:hover, .btn-home:hover, .btn-request:hover { background-color: #3c3c3c; }
         .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
         .dropdown .dropdown-item { color: #fff; }
         .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
-
-        /* --- UPDATE UTAMA DI SINI --- */
-        .movie-card {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: #222;
-        }
-        .movie-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
-        }
-        .movie-card img {
-            width: 100%;
-            display: block;
-            aspect-ratio: 2 / 3;
-            object-fit: cover;
-        }
-        .movie-card .card-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-            opacity: 0; /* Sembunyikan secara default */
-            transform: translateY(20px); /* Efek geser dari bawah */
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .movie-card:hover .card-info {
-            opacity: 1; /* Tampilkan saat hover */
-            transform: translateY(0);
-        }
-        .card-info .movie-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin: 0;
-        }
-        /* --- AKHIR UPDATE --- */
-
+        
+        .movie-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: #222; }
+        .movie-card:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4); }
+        .movie-card img { width: 100%; display: block; aspect-ratio: 2 / 3; object-fit: cover; }
+        .movie-card .card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; }
+        .movie-card:hover .card-info { opacity: 1; transform: translateY(0); }
+        .card-info .movie-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+        
         .quality-badge { position: absolute; top: 8px; right: 8px; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #fff; z-index: 2; }
         .quality-hd { background-color: #28a745; }
-        .quality-cam { background-color: #dc3545; }
-        .quality-sd { background-color: #17a2b8; }
         .quality-4k { background-color: #ffc107; color: #000; }
     </style>
 </head>
@@ -88,39 +47,36 @@
             <button class="btn btn-home" id="home-button">Home</button>
             <div class="dropdown" id="genre-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Genre</button><ul class="dropdown-menu" id="genre-dropdown-menu"></ul></div>
             <div class="dropdown" id="country-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Country</button><ul class="dropdown-menu" id="country-dropdown-menu"></ul></div>
+            <div class="dropdown" id="type-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Type</button><ul class="dropdown-menu" id="type-dropdown-menu"></ul></div>
             <a href="mailto:youremail@provider.com?subject=Request%20Movie/Series" class="btn btn-request">Request Content</a>
         </div>
     </header>
 
     <main class="container mt-4">
-    <div id="default-view">
-        <section id="latest-movies-section">
-            <!-- DIUBAH DI SINI: Judul jadi link -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="section-title mb-0">Latest Movies</h2>
-                <a href="movies.html" class="btn btn-outline-light btn-sm">See All →</a>
-            </div>
-            <div id="latest-movies-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
-        </section>
+        <div id="default-view">
+            <section id="latest-movies-section">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="section-title mb-0">Latest Movies</h2>
+                    <a href="movies.html" class="btn btn-outline-light btn-sm">See All →</a>
+                </div>
+                <div id="latest-movies-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
+            </section>
+            <section id="popular-series-section" class="mt-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="section-title mb-0">Popular Series</h2>
+                    <a href="series.html" class="btn btn-outline-light btn-sm">See All →</a>
+                </div>
+                <div id="popular-series-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
+            </section>
+        </div>
 
-        <section id="popular-series-section" class="mt-5">
-            <!-- DIUBAH DI SINI: Judul jadi link -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="section-title mb-0">Popular Series</h2>
-                <a href="series.html" class="btn btn-outline-light btn-sm">See All →</a>
-            </div>
-            <div id="popular-series-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
-        </section>
-    </div>
-
-    <!-- Bagian Filter View tidak berubah -->
-    <div id="filter-view" class="d-none">
-        <section id="filter-results-section">
-            <h2 class="section-title">Filter Results</h2>
-            <div id="movie-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
-        </section>
-    </div>
-</main>
+        <div id="filter-view" class="d-none">
+            <section id="filter-results-section">
+                <h2 class="section-title">Filter Results</h2>
+                <div id="movie-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
+            </section>
+        </div>
+    </main>
     
     <footer class="text-center py-4 mt-5"><p>© 2024 BroFlix.</p></footer>
 
