@@ -108,14 +108,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function initialize() {
         try {
             const response = await fetch('movies.json');
-            if (!response.ok) throw new Error(`Fetch error! status: ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             allContent = await response.json();
             
-            const latestMovies = allContent.filter(item => item.type === 'movie').sort((a,b) => b.id - a.id);
-            const popularSeries = allContent.filter(item => item.type === 'series').sort((a,b) => b.id - a.id);
+            // --- PERUBAHAN DI SINI ---
+            const movieLimit = 6; // Tentukan berapa film yang mau ditampilkan
+
+            // Ambil SEMUA film, urutkan, lalu POTONG sebanyak limit
+            const latestMovies = allContent.filter(item => item.type === 'movie')
+                                          .sort((a,b) => b.id - a.id)
+                                          .slice(0, movieLimit);
+            
+            // Ambil SEMUA series, urutkan, lalu POTONG sebanyak limit
+            const popularSeries = allContent.filter(item => item.type === 'series')
+                                           .sort((a,b) => b.id - a.id)
+                                           .slice(0, movieLimit);
+            // --- AKHIR PERUBAHAN ---
+
             displayContent(latestMovies, elements.latestGrid);
             displayContent(popularSeries, elements.popularSeriesGrid);
 
+            // ... sisa fungsi initialize tetap sama ...
             const allGenres = allContent.flatMap(item => item.genre || []).filter(g => g);
             const allCountries = allContent.flatMap(item => item.country || []).filter(c => c);
             const allTypes = allContent.map(item => item.type).filter(Boolean);
@@ -129,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         } catch (error) {
             console.error('Fatal Error during initialization:', error);
-            if(elements.latestGrid) elements.latestGrid.innerHTML = `<p class="text-danger col-12">Failed to load content. Please check the 'movies.json' file for syntax errors or check the browser console (F12) for more details.</p>`;
+            if(elements.latestGrid) elements.latestGrid.innerHTML = `<p class="text-danger col-12">Failed to load content.</p>`;
         }
     }
 
