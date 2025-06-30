@@ -19,6 +19,23 @@
     {
         "id": 2,
         "type": "movie",
+        "title": "Badarawuhi di Desa Penari (2024)",
+        "year": "2024",
+        "rating": "6.0",
+        "poster": "https://image.tmdb.org/t/p/original/A4kY5RKiPJ0sRknU4NojItr93Jr.jpg",
+        "country": ["Indonesia"],
+        "genre": ["Horror", "Mystery", "Thriller"],
+        "quality": "HD",
+        "director": "Kimo Stamboel",
+        "cast": "Maudy Effrosina, Aulia Sarah, Jourdy Pranata",
+        "description": "Mila must return a mystical bracelet to the Dancing Village unaware that Badarawuhi - a mysterious, mythical being who rules the village - awaits her.",
+        "trailerUrl": "https://vidlink.pro/movie/1176166",
+        "availableSubtitles": ["Indonesian", "English", "Spanish"],
+        "keywords": ["dancing", "based on novel or book", "snake", "dance", "revenge", "village", "forest", "prequel", "haunting", "ghost", "traditional dancer", "dance ritual", "supernatural horror", "terror", "traditional dance", "supernatural thriller", "based on twitter thread"]
+    },
+    {
+        "id": 3,
+        "type": "movie",
         "title": "KPop Demon Hunters (2025)",
         "year": "2025",
         "rating": "8.6",
@@ -34,7 +51,7 @@
         "keywords": ["double life", "musical", "supernatural", "female protagonist", "duringcreditsstinger", "demon hunter", "girl group", "boy band", "fandom", "k-pop", "3d animation", "save the world", "admiring", "joyful", "k-pop group", "trio"]
     },
     {
-        "id": 3,
+        "id": 4,
         "type": "series",
         "title": "Squid Game (2021)",
         "year": "2021",
@@ -88,7 +105,7 @@
         ]
     },
     {
-        "id": 4,
+        "id": 5,
         "type": "movie",
         "title": "John Wick: Chapter 2 (2017)",
         "year": "2017",
@@ -105,7 +122,7 @@
         "keywords": ["hitman", "secret organization", "sequel", "revenge", "shootout", "handshake", "neo-noir", "guns", "dark", "dogs", "cliché", "roof-top"]
     },
     {
-        "id": 5,
+        "id": 6,
         "type": "series",
         "title": "The Last of Us (2023)",
         "year": "2023",
