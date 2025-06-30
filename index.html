@@ -20,12 +20,13 @@
         .dropdown .dropdown-item { color: #fff; }
         .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
         
+        /* -- UPDATE POSTER & JUDUL -- */
         .movie-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: #222; }
         .movie-card:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4); }
         .movie-card img { width: 100%; display: block; aspect-ratio: 2 / 3; object-fit: cover; }
-        .movie-card .card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; }
+        .movie-card .card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; min-height: 70px; display: flex; align-items: flex-end; }
         .movie-card:hover .card-info { opacity: 1; transform: translateY(0); }
-        .card-info .movie-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; }
+        .card-info .movie-title { font-size: 0.85rem; font-weight: 600; margin: 0; color: #fff; line-height: 1.3; white-space: normal; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; width: 100%; }
         
         .quality-badge { position: absolute; top: 8px; right: 8px; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #fff; z-index: 2; }
         .quality-hd { background-color: #28a745; }
@@ -59,6 +60,7 @@
                     <h2 class="section-title mb-0">Latest Movies</h2>
                     <a href="movies.html" class="btn btn-outline-light btn-sm">See All →</a>
                 </div>
+                <!-- UPDATE UKURAN POSTER: ganti class grid di bawah ini -->
                 <div id="latest-movies-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
             </section>
             <section id="popular-series-section" class="mt-5">
@@ -66,6 +68,7 @@
                     <h2 class="section-title mb-0">Popular Series</h2>
                     <a href="series.html" class="btn btn-outline-light btn-sm">See All →</a>
                 </div>
+                <!-- UPDATE UKURAN POSTER: ganti class grid di bawah ini -->
                 <div id="popular-series-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
             </section>
         </div>
@@ -73,6 +76,7 @@
         <div id="filter-view" class="d-none">
             <section id="filter-results-section">
                 <h2 class="section-title">Filter Results</h2>
+                <!-- UPDATE UKURAN POSTER: ganti class grid di bawah ini -->
                 <div id="movie-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
             </section>
         </div>
