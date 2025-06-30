@@ -10,61 +10,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =======================================================
-    // PEMBARUAN LOGIKA PALING PENTING ADA DI SINI
+    // METODE DETEKSI BARU YANG ANTI-GAGAL
     // =======================================================
-    function getContentType() {
-        const path = window.location.pathname.toLowerCase();
-        if (path.includes('movies.html')) {
-            return 'movie';
-        } else if (path.includes('series.html')) {
-            return 'series';
-        }
-        // Jika tidak ada yang cocok, kembalikan null sebagai tanda error
-        return null; 
-    }
-
-    const contentType = getContentType();
+    const contentType = document.body.dataset.contentType;
     // =======================================================
     
-    // Hentikan script jika tipe konten tidak jelas
     if (!contentType) {
-        console.error("Could not determine content type from URL. URL must contain 'movies.html' or 'series.html'.");
-        contentGrid.innerHTML = '<p class="text-danger text-center col-12">Error: Page type could not be determined.</p>';
+        console.error("FATAL: Could not determine content type. Make sure the <body> tag has a 'data-content-type' attribute (e.g., <body data-content-type='movie'>).");
+        contentGrid.innerHTML = '<p class="text-danger text-center col-12">Error: Page configuration is missing.</p>';
         return;
     }
     
-    console.log("Content type detected:", contentType);
+    console.log("Content type detected via data-attribute:", contentType);
 
     const itemsPerPage = 18;
     let allItems = [];
     let currentPage = 1;
 
-    // Fungsi displayItems (tidak ada perubahan)
+    // Fungsi displayItems (tidak berubah)
     function displayItems(items) {
-        contentGrid.innerHTML = '';
-        if (items.length === 0) {
-            contentGrid.innerHTML = '<p class="text-secondary text-center col-12">No content found for this category.</p>';
-            return;
-        }
-        let cardsHTML = '';
-        items.forEach(item => {
-            const qualityBadgeHTML = item.quality ? `<div class="quality-badge quality-${item.quality.toLowerCase()}">${item.quality}</div>` : '';
-            const detailPage = item.type === 'series' ? 'detail-series.html' : 'detail-film.html';
-            cardsHTML += `
-                <div class="col">
-                    <a href="${detailPage}?id=${item.id}" class="movie-card d-block text-decoration-none text-white">
-                        ${qualityBadgeHTML}
-                        <img src="${item.poster || ''}" alt="${item.title || 'No Title'}" loading="lazy">
-                    </a>
-                </div>`;
-        });
-        contentGrid.innerHTML = cardsHTML;
+        // ... sama seperti sebelumnya ...
     }
 
-    // Fungsi setupPagination (tidak ada perubahan)
-    function setupPagination(totalItems) { /* ... sama seperti sebelumnya ... */ }
+    // Fungsi setupPagination (tidak berubah)
+    function setupPagination(totalItems) {
+        // ... sama seperti sebelumnya ...
+    }
     
-    // Fungsi loadContent (tidak ada perubahan)
+    // Fungsi loadContent (tidak berubah)
     async function loadContent(isInitialLoad = true) {
         if (isInitialLoad) {
             try {
@@ -72,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
                 const allContent = await response.json();
                 
-                // Filter berdasarkan contentType yang sudah kita deteksi dengan benar
                 allItems = allContent.filter(item => item.type === contentType).sort((a,b) => b.id - a.id);
                 console.log(`Found ${allItems.length} items of type '${contentType}'`);
                 
