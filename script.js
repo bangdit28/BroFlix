@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
-    // 1. Mengambil semua elemen dari HTML
     const elements = {
         latestGrid: document.getElementById('latest-movies-grid'),
         popularSeriesGrid: document.getElementById('popular-series-grid'),
@@ -15,18 +14,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         searchInput: document.getElementById('search-input'),
         defaultView: document.getElementById('default-view'),
         filterView: document.getElementById('filter-view'),
-        trailerModal: new bootstrap.Modal(document.getElementById('trailerModal')),
-        trailerIframe: document.getElementById('trailer-iframe'),
     };
-
-    // Hentikan video saat modal ditutup
-    document.getElementById('trailerModal')?.addEventListener('hidden.bs.modal', () => {
-        elements.trailerIframe.src = '';
-    });
 
     let allContent = [];
 
-    // 2. Fungsi untuk membuat dan menampilkan kartu film/series
+    // FUNGSI KARTU FILM KEMBALI KE SEMULA (TANPA TOMBOL)
     function displayContent(content, gridElement) {
         if (!gridElement) return;
         gridElement.innerHTML = '';
@@ -38,41 +30,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         content.forEach(item => {
             const qualityBadgeHTML = item.quality ? `<div class="quality-badge quality-${item.quality.toLowerCase()}">${item.quality}</div>` : '';
             const detailPage = item.type === 'series' ? 'detail-series.html' : 'detail-film.html';
-            const trailerButtonHTML = item.trailerUrl ? `<button class="btn btn-card btn-trailer" data-trailer-url="${item.trailerUrl}"><i class="fas fa-play me-1"></i>TRAILER</button>` : '';
-
             cardsHTML += `
                 <div class="col">
-                    <div class="movie-card">
-                        <img src="${item.poster || ''}" alt="${item.title || 'No Title'}" loading="lazy">
+                    <a href="${detailPage}?id=${item.id}" class="movie-card d-block text-decoration-none text-white">
                         ${qualityBadgeHTML}
-                        <div class="card-overlay">
-                            <div>
-                                <h6 class="movie-title">${item.title}</h6>
-                                <div class="button-group">
-                                    ${trailerButtonHTML}
-                                    <a href="${detailPage}?id=${item.id}" class="btn btn-card btn-movie"><i class="fas fa-film me-1"></i>MOVIE</a>
-                                </div>
-                            </div>
+                        <img src="${item.poster || ''}" alt="${item.title || 'No Title'}" loading="lazy">
+                        <div class="card-info">
+                            <h6 class="movie-title">${item.title}</h6>
                         </div>
-                    </div>
+                    </a>
                 </div>`;
         });
         gridElement.innerHTML = cardsHTML;
-        
-        // Tambahkan fungsi klik untuk SEMUA tombol trailer yang baru dibuat
-        gridElement.querySelectorAll('.btn-trailer').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const trailerUrl = button.dataset.trailerUrl;
-                if (trailerUrl && elements.trailerIframe) {
-                    elements.trailerIframe.src = trailerUrl + "?autoplay=1&mute=1";
-                    elements.trailerModal.show();
-                }
-            });
-        });
     }
 
-    // 3. Fungsi untuk membuat pilihan di menu dropdown
     function createFilterDropdowns(items, menuElement, buttonElement, filterType) {
         if (!menuElement || !buttonElement) return;
         let itemsHTML = `<li><a class="dropdown-item active" href="#" data-filter="all">All ${filterType}</a></li>`;
@@ -91,7 +62,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
     
-    // 4. Fungsi untuk memfilter konten berdasarkan pilihan user
     function filterAndDisplayContent() {
         if (!elements.defaultView || !elements.filterView) return;
         elements.defaultView.classList.add('d-none');
@@ -119,7 +89,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayContent(filtered, elements.movieGrid);
     }
     
-    // 5. Fungsi untuk kembali ke tampilan awal
     function showHomePageView() {
         if (!elements.defaultView || !elements.filterView) return;
         elements.defaultView.classList.remove('d-none');
@@ -136,14 +105,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // 6. Fungsi utama yang berjalan saat halaman dimuat
     async function initialize() {
         try {
             const response = await fetch('movies.json');
             if (!response.ok) throw new Error(`Fetch error! status: ${response.status}`);
             allContent = await response.json();
             
-            const movieLimit = 12; // Jumlah item di halaman utama
+            const movieLimit = 12;
             const latestMovies = allContent.filter(item => item.type === 'movie').sort((a,b) => b.id - a.id).slice(0, movieLimit);
             const popularSeries = allContent.filter(item => item.type === 'series').sort((a,b) => b.id - a.id).slice(0, movieLimit);
             
@@ -162,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             elements.homeButton?.addEventListener('click', showHomePageView);
         } catch (error) {
             console.error('Fatal Error during initialization:', error);
-            if(elements.latestGrid) elements.latestGrid.innerHTML = `<p class="text-danger col-12">Failed to load content. Check movies.json or console (F12).</p>`;
+            if(elements.latestGrid) elements.latestGrid.innerHTML = `<p class="text-danger col-12">Failed to load content.</p>`;
         }
     }
     initialize();
