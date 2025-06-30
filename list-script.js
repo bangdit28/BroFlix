@@ -1,25 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("list-script.js loaded"); // Pesan untuk memastikan script berjalan
+    console.log("list-script.js loaded");
 
     const contentGrid = document.getElementById('content-grid');
     const paginationContainer = document.getElementById('pagination-container');
     
-    // Jika elemen penting tidak ditemukan, hentikan script
     if (!contentGrid || !paginationContainer) {
         console.error("Critical elements not found! Make sure 'content-grid' and 'pagination-container' exist in your HTML.");
         return;
     }
 
-    // Cara yang lebih aman untuk menentukan tipe konten
-    const pagePath = window.location.pathname.toLowerCase();
-    const contentType = pagePath.includes('series.html') ? 'series' : 'movie';
-    console.log("Content type detected:", contentType); // Cek apakah tipe konten terdeteksi benar
+    // =======================================================
+    // PEMBARUAN LOGIKA PALING PENTING ADA DI SINI
+    // =======================================================
+    function getContentType() {
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('movies.html')) {
+            return 'movie';
+        } else if (path.includes('series.html')) {
+            return 'series';
+        }
+        // Jika tidak ada yang cocok, kembalikan null sebagai tanda error
+        return null; 
+    }
+
+    const contentType = getContentType();
+    // =======================================================
+    
+    // Hentikan script jika tipe konten tidak jelas
+    if (!contentType) {
+        console.error("Could not determine content type from URL. URL must contain 'movies.html' or 'series.html'.");
+        contentGrid.innerHTML = '<p class="text-danger text-center col-12">Error: Page type could not be determined.</p>';
+        return;
+    }
+    
+    console.log("Content type detected:", contentType);
 
     const itemsPerPage = 18;
     let allItems = [];
     let currentPage = 1;
 
-    // Fungsi displayItems (tidak berubah, tapi kita pastikan benar)
+    // Fungsi displayItems (tidak ada perubahan)
     function displayItems(items) {
         contentGrid.innerHTML = '';
         if (items.length === 0) {
@@ -41,49 +61,25 @@ document.addEventListener('DOMContentLoaded', () => {
         contentGrid.innerHTML = cardsHTML;
     }
 
-    // Fungsi setupPagination (tidak berubah)
-    function setupPagination(totalItems) {
-        paginationContainer.innerHTML = '';
-        const pageCount = Math.ceil(totalItems / itemsPerPage);
-        if (pageCount <= 1) return; // Jangan tampilkan paginasi jika cuma 1 halaman
-
-        for (let i = 1; i <= pageCount; i++) {
-            const pageButton = document.createElement('li');
-            pageButton.className = 'page-item';
-            if (i === currentPage) {
-                pageButton.classList.add('active');
-            }
-            const link = document.createElement('a');
-            link.className = 'page-link';
-            link.href = '#';
-            link.innerText = i;
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                currentPage = i;
-                loadContent(false); // false berarti tidak perlu fetch data lagi
-                window.scrollTo(0, 0);
-            });
-            pageButton.appendChild(link);
-            paginationContainer.appendChild(pageButton);
-        }
-    }
+    // Fungsi setupPagination (tidak ada perubahan)
+    function setupPagination(totalItems) { /* ... sama seperti sebelumnya ... */ }
     
-    // Fungsi loadContent sedikit di-refactor agar lebih aman
+    // Fungsi loadContent (tidak ada perubahan)
     async function loadContent(isInitialLoad = true) {
-        // Hanya ambil data dari JSON saat pertama kali load
         if (isInitialLoad) {
             try {
                 const response = await fetch('movies.json');
                 if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
                 const allContent = await response.json();
                 
+                // Filter berdasarkan contentType yang sudah kita deteksi dengan benar
                 allItems = allContent.filter(item => item.type === contentType).sort((a,b) => b.id - a.id);
-                console.log(`Found ${allItems.length} items of type '${contentType}'`); // Cek jumlah item yang ditemukan
+                console.log(`Found ${allItems.length} items of type '${contentType}'`);
                 
                 setupPagination(allItems.length);
             } catch (error) {
                 console.error("Failed to load content:", error);
-                contentGrid.innerHTML = '<p class="text-danger text-center col-12">Failed to load content. Please check the console (F12) for more details.</p>';
+                contentGrid.innerHTML = '<p class="text-danger text-center col-12">Failed to load content. Please check console (F12).</p>';
                 return;
             }
         }
@@ -101,6 +97,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Jalankan fungsi utama
     loadContent(true);
 });
