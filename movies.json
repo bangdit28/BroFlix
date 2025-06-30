@@ -18,6 +18,23 @@
     },
     {
         "id": 2,
+        "type": "movie",
+        "title": "KPop Demon Hunters (2025)",
+        "year": "2025",
+        "rating": "8.6",
+        "poster": "https://image.tmdb.org/t/p/original/jfS5KEfiwsS35ieZvdUdJKkwLlZ.jpg",
+        "country": ["United States"],
+        "genre": ["Animation", "Fantasy", "Action", "Comedy"],
+        "quality": "HD",
+        "director": "Maggie Kang, Chris Appelhans",
+        "cast": "Arden Cho, May Hong, Ji-young Yoo",
+        "description": "When K-pop superstars Rumi, Mira and Zoey aren't selling out stadiums, they're using their secret powers to protect their fans from supernatural threats.",
+        "trailerUrl": "https://vidlink.pro/movie/803796",
+        "availableSubtitles": ["Indonesian", "English", "Spanish"],
+        "keywords": ["double life", "musical", "supernatural", "female protagonist", "duringcreditsstinger", "demon hunter", "girl group", "boy band", "fandom", "k-pop", "3d animation", "save the world", "admiring", "joyful", "k-pop group", "trio"]
+    },
+    {
+        "id": 3,
         "type": "series",
         "title": "Squid Game (2021)",
         "year": "2021",
@@ -71,7 +88,7 @@
         ]
     },
     {
-        "id": 3,
+        "id": 4,
         "type": "movie",
         "title": "John Wick: Chapter 2 (2017)",
         "year": "2017",
@@ -88,7 +105,7 @@
         "keywords": ["hitman", "secret organization", "sequel", "revenge", "shootout", "handshake", "neo-noir", "guns", "dark", "dogs", "cliché", "roof-top"]
     },
     {
-        "id": 4,
+        "id": 5,
         "type": "series",
         "title": "The Last of Us (2023)",
         "year": "2023",
