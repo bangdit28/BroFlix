@@ -1,16 +1,32 @@
 document.addEventListener('DOMContentLoaded', async () => {
     
-    const elements = { /* ... sama seperti sebelumnya ... */ };
-    const trailerModalElement = document.getElementById('trailerModal');
-    const trailerIframe = document.getElementById('trailer-iframe');
-    const trailerModal = new bootstrap.Modal(trailerModalElement);
+    // 1. Mengambil semua elemen dari HTML
+    const elements = {
+        latestGrid: document.getElementById('latest-movies-grid'),
+        popularSeriesGrid: document.getElementById('popular-series-grid'),
+        movieGrid: document.getElementById('movie-grid'),
+        genreDropdownMenu: document.getElementById('genre-dropdown-menu'),
+        countryDropdownMenu: document.getElementById('country-dropdown-menu'),
+        typeDropdownMenu: document.getElementById('type-dropdown-menu'),
+        genreButton: document.querySelector('#genre-filter-container .btn'),
+        countryButton: document.querySelector('#country-filter-container .btn'),
+        typeButton: document.querySelector('#type-filter-container .btn'),
+        homeButton: document.getElementById('home-button'),
+        searchInput: document.getElementById('search-input'),
+        defaultView: document.getElementById('default-view'),
+        filterView: document.getElementById('filter-view'),
+        trailerModal: new bootstrap.Modal(document.getElementById('trailerModal')),
+        trailerIframe: document.getElementById('trailer-iframe'),
+    };
 
-    trailerModalElement.addEventListener('hidden.bs.modal', () => {
-        trailerIframe.src = ''; // Hentikan video saat modal ditutup
+    // Hentikan video saat modal ditutup
+    document.getElementById('trailerModal')?.addEventListener('hidden.bs.modal', () => {
+        elements.trailerIframe.src = '';
     });
 
     let allContent = [];
 
+    // 2. Fungsi untuk membuat dan menampilkan kartu film/series
     function displayContent(content, gridElement) {
         if (!gridElement) return;
         gridElement.innerHTML = '';
@@ -43,39 +59,110 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         gridElement.innerHTML = cardsHTML;
         
+        // Tambahkan fungsi klik untuk SEMUA tombol trailer yang baru dibuat
         gridElement.querySelectorAll('.btn-trailer').forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 const trailerUrl = button.dataset.trailerUrl;
-                if (trailerUrl) {
-                    trailerIframe.src = trailerUrl + "?autoplay=1&mute=1";
-                    trailerModal.show();
+                if (trailerUrl && elements.trailerIframe) {
+                    elements.trailerIframe.src = trailerUrl + "?autoplay=1&mute=1";
+                    elements.trailerModal.show();
                 }
             });
         });
     }
 
-    function createFilterDropdowns(items, menuElement, buttonElement, filterType) { /* ... sama seperti sebelumnya ... */ }
-    function filterAndDisplayContent() { /* ... sama seperti sebelumnya ... */ }
-    function showHomePageView() { /* ... sama seperti sebelumnya ... */ }
+    // 3. Fungsi untuk membuat pilihan di menu dropdown
+    function createFilterDropdowns(items, menuElement, buttonElement, filterType) {
+        if (!menuElement || !buttonElement) return;
+        let itemsHTML = `<li><a class="dropdown-item active" href="#" data-filter="all">All ${filterType}</a></li>`;
+        [...new Set(items)].sort().forEach(item => {
+            itemsHTML += `<li><a class="dropdown-item" href="#" data-filter="${item}">${item}</a></li>`;
+        });
+        menuElement.innerHTML = itemsHTML;
+        menuElement.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                buttonElement.textContent = e.target.textContent;
+                menuElement.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('active'));
+                e.target.classList.add('active');
+                filterAndDisplayContent();
+            });
+        });
+    }
+    
+    // 4. Fungsi untuk memfilter konten berdasarkan pilihan user
+    function filterAndDisplayContent() {
+        if (!elements.defaultView || !elements.filterView) return;
+        elements.defaultView.classList.add('d-none');
+        elements.filterView.classList.remove('d-none');
 
+        const activeGenre = elements.genreDropdownMenu?.querySelector('.active')?.dataset.filter || 'all';
+        const activeCountry = elements.countryDropdownMenu?.querySelector('.active')?.dataset.filter || 'all';
+        const activeType = elements.typeDropdownMenu?.querySelector('.active')?.dataset.filter || 'all';
+        const searchTerm = elements.searchInput?.value.toLowerCase() || '';
+
+        if (activeGenre === 'all' && activeCountry === 'all' && activeType === 'all' && searchTerm.trim() === '') {
+            showHomePageView();
+            return;
+        }
+
+        let filtered = allContent.filter(item => {
+            const genreMatch = activeGenre === 'all' || (item.genre && item.genre.includes(activeGenre));
+            const countryMatch = activeCountry === 'all' || (item.country && item.country.includes(activeCountry));
+            const typeMatch = activeType === 'all' || (item.type && item.type === activeType);
+            const searchMatch = searchTerm.trim() === '' || 
+                                (item.title && item.title.toLowerCase().includes(searchTerm)) ||
+                                (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(searchTerm)));
+            return genreMatch && countryMatch && typeMatch && searchMatch;
+        });
+        displayContent(filtered, elements.movieGrid);
+    }
+    
+    // 5. Fungsi untuk kembali ke tampilan awal
+    function showHomePageView() {
+        if (!elements.defaultView || !elements.filterView) return;
+        elements.defaultView.classList.remove('d-none');
+        elements.filterView.classList.add('d-none');
+        if (elements.searchInput) elements.searchInput.value = '';
+        
+        if (elements.genreButton) elements.genreButton.textContent = "Genre";
+        if (elements.countryButton) elements.countryButton.textContent = "Country";
+        if (elements.typeButton) elements.typeButton.textContent = "Type";
+        
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.querySelector('.active')?.classList.remove('active');
+            menu.querySelector('[data-filter="all"]')?.classList.add('active');
+        });
+    }
+
+    // 6. Fungsi utama yang berjalan saat halaman dimuat
     async function initialize() {
         try {
             const response = await fetch('movies.json');
             if (!response.ok) throw new Error(`Fetch error! status: ${response.status}`);
             allContent = await response.json();
             
-            const movieLimit = 12;
-
+            const movieLimit = 12; // Jumlah item di halaman utama
             const latestMovies = allContent.filter(item => item.type === 'movie').sort((a,b) => b.id - a.id).slice(0, movieLimit);
             const popularSeries = allContent.filter(item => item.type === 'series').sort((a,b) => b.id - a.id).slice(0, movieLimit);
             
             displayContent(latestMovies, elements.latestGrid);
             displayContent(popularSeries, elements.popularSeriesGrid);
+
+            const allGenres = allContent.flatMap(item => item.genre || []).filter(g => g);
+            const allCountries = allContent.flatMap(item => item.country || []).filter(c => c);
+            const allTypes = allContent.map(item => item.type).filter(Boolean);
+
+            createFilterDropdowns(allGenres, elements.genreDropdownMenu, elements.genreButton, 'Genres');
+            createFilterDropdowns(allCountries, elements.countryDropdownMenu, elements.countryButton, 'Countries');
+            createFilterDropdowns(allTypes, elements.typeDropdownMenu, elements.typeButton, 'Types');
             
-            // ... sisa fungsi initialize sama persis ...
+            elements.searchInput?.addEventListener('input', filterAndDisplayContent);
+            elements.homeButton?.addEventListener('click', showHomePageView);
         } catch (error) {
             console.error('Fatal Error during initialization:', error);
+            if(elements.latestGrid) elements.latestGrid.innerHTML = `<p class="text-danger col-12">Failed to load content. Check movies.json or console (F12).</p>`;
         }
     }
     initialize();
