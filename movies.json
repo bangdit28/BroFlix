@@ -6,7 +6,7 @@
         "year": "2014",
         "rating": "7.4",
         "poster": "https://image.tmdb.org/t/p/original/wXqWR7dHncNRbxoEGybEy7QTe9h.jpg",
-        "country": "United States",
+        "country": ["United States"],
         "genre": ["Action", "Thriller"],
         "quality": "HD",
         "director": "Chad Stahelski",
