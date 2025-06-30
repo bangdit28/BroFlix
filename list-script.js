@@ -1,32 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Memastikan elemen-elemen penting ada di halaman
     const contentGrid = document.getElementById('content-grid');
     const paginationContainer = document.getElementById('pagination-container');
     
-    if (!contentGrid || !paginationContainer) { console.error("Critical elements not found!"); return; }
+    if (!contentGrid || !paginationContainer) {
+        console.error("Critical elements not found! Make sure 'content-grid' and 'pagination-container' exist in your HTML.");
+        return;
+    }
 
+    // Mendeteksi tipe halaman dari data-attribute di <body>
     const contentType = document.body.dataset.contentType;
     
     if (!contentType) {
-        console.error("FATAL: Could not determine content type.");
+        console.error("FATAL: Could not determine content type. Make sure the <body> tag has a 'data-content-type' attribute.");
         contentGrid.innerHTML = '<p class="text-danger text-center col-12">Error: Page configuration is missing.</p>';
         return;
     }
     
-    const itemsPerPage = 24; // Tampilkan 24 item per halaman
+    const itemsPerPage = 24; // Jumlah item per halaman
     let allItems = [];
     let currentPage = 1;
 
+    // Fungsi untuk membuat kartu film/series
     function displayItems(items) {
         contentGrid.innerHTML = '';
         if (items.length === 0) {
-            contentGrid.innerHTML = '<p class="text-secondary text-center col-12">No content found.</p>';
+            contentGrid.innerHTML = '<p class="text-secondary text-center col-12">No content found for this category.</p>';
             return;
         }
         let cardsHTML = '';
         items.forEach(item => {
             const qualityBadgeHTML = item.quality ? `<div class="quality-badge quality-${item.quality.toLowerCase()}">${item.quality}</div>` : '';
             const detailPage = item.type === 'series' ? 'detail-series.html' : 'detail-film.html';
-            // UPDATE JUDUL: tambahkan tahun di sini
             cardsHTML += `
                 <div class="col">
                     <a href="${detailPage}?id=${item.id}" class="movie-card d-block text-decoration-none text-white">
@@ -41,9 +46,69 @@ document.addEventListener('DOMContentLoaded', () => {
         contentGrid.innerHTML = cardsHTML;
     }
 
-    function setupPagination(totalItems) { /* ... sama seperti versi final sebelumnya ... */ }
-    
-    async function loadContent(isInitialLoad = true) { /* ... sama seperti versi final sebelumnya ... */ }
+    // Fungsi untuk membuat tombol-tombol halaman (paginasi)
+    function setupPagination(totalItems) {
+        paginationContainer.innerHTML = '';
+        const pageCount = Math.ceil(totalItems / itemsPerPage);
+        if (pageCount <= 1) return; // Jangan tampilkan jika hanya 1 halaman
 
+        for (let i = 1; i <= pageCount; i++) {
+            const pageButton = document.createElement('li');
+            pageButton.className = 'page-item';
+            if (i === currentPage) {
+                pageButton.classList.add('active');
+            }
+            const link = document.createElement('a');
+            link.className = 'page-link';
+            link.href = '#';
+            link.innerText = i;
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentPage = i;
+                loadContent(false); // false berarti tidak perlu fetch data lagi
+                window.scrollTo(0, 0);
+            });
+            pageButton.appendChild(link);
+            paginationContainer.appendChild(pageButton);
+        }
+    }
+    
+    // Fungsi utama untuk memuat data dan menampilkannya
+    async function loadContent(isInitialLoad = true) {
+        if (isInitialLoad) {
+            try {
+                const response = await fetch('movies.json');
+                if (!response.ok) throw new Error(`Fetch error: ${response.statusText}`);
+                const allContent = await response.json();
+                
+                // Filter konten berdasarkan tipe halaman dan urutkan
+                allItems = allContent.filter(item => item.type === contentType).sort((a,b) => b.id - a.id);
+                
+                // Siapkan paginasi berdasarkan jumlah total item yang ditemukan
+                setupPagination(allItems.length);
+            } catch (error) {
+                console.error("Failed to load content:", error);
+                contentGrid.innerHTML = '<p class="text-danger text-center col-12">Failed to load content. Please check console (F12).</p>';
+                return;
+            }
+        }
+        
+        // Potong data sesuai halaman yang aktif
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const itemsToShow = allItems.slice(startIndex, endIndex);
+        
+        // Tampilkan item yang sudah dipotong
+        displayItems(itemsToShow);
+
+        // Update tombol 'active' di paginasi
+        const allButtons = paginationContainer.querySelectorAll('.page-item');
+        allButtons.forEach(btn => btn.classList.remove('active'));
+        if (allButtons[currentPage - 1]) {
+            allButtons[currentPage - 1].classList.add('active');
+        }
+    }
+
+    // Jalankan semuanya saat halaman pertama kali dibuka
     loadContent(true);
 });
