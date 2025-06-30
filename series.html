@@ -2,21 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- GANTI JUDUL DI SINI -->
-    <title>All Series - BroFlix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Series - BroFlix</title> <!-- Judul sudah benar -->
     <link rel="icon" type="image/png" href="favicon.png">
-    <!-- ... sisa <head> sama persis dengan movies.html ... -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Style ini sama persis dengan di movies.html, pastikan tidak ada yang beda -->
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #141414; color: #fff; }
+        .section-title { color: #fff; font-weight: 600; margin-bottom: 1.5rem; border-left: 4px solid #e50914; padding-left: 1rem; }
+        .movie-card { position: relative; border-radius: 8px; overflow: hidden; background-color: #222; transition: transform 0.3s ease; }
+        .movie-card:hover { transform: scale(1.05); }
+        .movie-card img { width: 100%; display: block; aspect-ratio: 2 / 3; object-fit: cover; }
+        .quality-badge { position: absolute; top: 8px; right: 8px; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #fff; z-index: 2; }
+        .quality-hd { background-color: #28a745; } .quality-4k { background-color: #ffc107; color: #000; }
+        .page-link { background-color: #2b2b2b; border-color: #444; color: #fff; }
+        .page-item.active .page-link { background-color: #e50914; border-color: #e50914; }
+        .page-link:hover { background-color: #3c3c3c; color: #fff; }
+    </style>
 </head>
 <body>
     <main class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <!-- GANTI JUDUL DI SINI -->
-            <h2 class="section-title mb-0">All Series</h2>
+            <h2 class="section-title mb-0">All Series</h2> <!-- Judul Halaman sudah benar -->
             <a href="index.html" class="btn btn-outline-light btn-sm">← Back to Home</a>
         </div>
-        <!-- ... sisa <body> sama persis dengan movies.html ... -->
+
+        <!-- Pastikan ID ini benar: "content-grid" -->
+        <div id="content-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+            <!-- Series akan dimuat di sini oleh JS -->
+        </div>
+
+        <!-- Pastikan ID ini benar: "pagination-container" -->
+        <nav class="d-flex justify-content-center mt-5">
+            <ul class="pagination" id="pagination-container">
+                <!-- Tombol halaman akan dibuat di sini oleh JS -->
+            </ul>
+        </nav>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Pastikan nama file script ini benar: "list-script.js" -->
     <script src="list-script.js"></script>
 </body>
 </html>
