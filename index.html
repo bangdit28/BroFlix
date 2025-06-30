@@ -16,42 +16,43 @@
         .section-title { color: #fff; font-weight: 600; border-left: 4px solid #e50914; padding-left: 1rem; }
         .dropdown .btn, .btn-home, .btn-request { background-color: #2b2b2b; border-color: #444; color: #fff; }
         .dropdown .btn:hover, .btn-home:hover, .btn-request:hover { background-color: #3c3c3c; }
-        .dropdown .dropdown-menu { background-color: #222; border-color: #444; }
-        .dropdown .dropdown-item { color: #fff; }
-        .dropdown .dropdown-item:hover, .dropdown .dropdown-item.active { background-color: #e50914; }
         
-        /* -- UPDATE POSTER & JUDUL -- */
-        .movie-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: #222; }
-        .movie-card:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4); }
+        /* -- UPDATE KARTU FILM & TOMBOL -- */
+        .movie-card { position: relative; border-radius: 8px; overflow: hidden; background-color: #222; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .movie-card:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); }
         .movie-card img { width: 100%; display: block; aspect-ratio: 2 / 3; object-fit: cover; }
-        .movie-card .card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease; min-height: 70px; display: flex; align-items: flex-end; }
-        .movie-card:hover .card-info { opacity: 1; transform: translateY(0); }
-        .card-info .movie-title { font-size: 0.85rem; font-weight: 600; margin: 0; color: #fff; line-height: 1.3; white-space: normal; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; width: 100%; }
+        .movie-card .card-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent 60%); opacity: 0; transition: opacity 0.3s ease; display: flex; flex-direction: column; justify-content: flex-end; padding: 0.75rem; }
+        .movie-card:hover .card-overlay { opacity: 1; }
+        .card-overlay .movie-title { font-size: 0.9rem; font-weight: 600; color: #fff; line-height: 1.3; white-space: normal; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-bottom: 0.75rem; }
+        .card-overlay .button-group { display: flex; gap: 0.5rem; }
+        .btn-card { flex-grow: 1; font-size: 0.8rem; font-weight: 600; border: none; padding: 0.5rem; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .btn-trailer { background-color: #28a745; color: #fff; }
+        .btn-trailer:hover { background-color: #218838; }
+        .btn-movie { background-color: #e50914; color: #fff; }
+        .btn-movie:hover { background-color: #c82333; }
         
         .quality-badge { position: absolute; top: 8px; right: 8px; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #fff; z-index: 2; }
-        .quality-hd { background-color: #28a745; }
-        .quality-4k { background-color: #ffc107; color: #000; }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">BROFLIX</a>
-            <form class="d-flex w-50" id="search-form" onsubmit="return false;">
-                <input id="search-input" class="form-control me-2 bg-dark text-white border-secondary" type="search" placeholder="Search...">
-            </form>
+    <!-- MODAL UNTUK TRAILER (WAJIB ADA) -->
+    <div class="modal fade" id="trailerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="trailer-iframe" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
 
-    <header class="filter-section pt-5">
-        <div class="container d-flex flex-wrap align-items-center gap-2">
-            <button class="btn btn-home" id="home-button">Home</button>
-            <div class="dropdown" id="genre-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Genre</button><ul class="dropdown-menu" id="genre-dropdown-menu"></ul></div>
-            <div class="dropdown" id="country-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Country</button><ul class="dropdown-menu" id="country-dropdown-menu"></ul></div>
-            <div class="dropdown" id="type-filter-container"><button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Type</button><ul class="dropdown-menu" id="type-dropdown-menu"></ul></div>
-            <a href="mailto:youremail@provider.com?subject=Request%20Movie/Series" class="btn btn-request">Request Content</a>
-        </div>
-    </header>
+    <nav class="navbar navbar-expand-lg fixed-top"> <!-- ... sama seperti sebelumnya ... --> </nav>
+    <header class="filter-section pt-5"> <!-- ... sama seperti sebelumnya ... --> </header>
 
     <main class="container mt-4">
         <div id="default-view">
@@ -68,15 +69,12 @@
                     <h2 class="section-title mb-0">Popular Series</h2>
                     <a href="series.html" class="btn btn-outline-light btn-sm">See All →</a>
                 </div>
-                <!-- UPDATE UKURAN POSTER: ganti class grid di bawah ini -->
                 <div id="popular-series-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
             </section>
         </div>
-
         <div id="filter-view" class="d-none">
             <section id="filter-results-section">
                 <h2 class="section-title">Filter Results</h2>
-                <!-- UPDATE UKURAN POSTER: ganti class grid di bawah ini -->
                 <div id="movie-grid" class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3"></div>
             </section>
         </div>
